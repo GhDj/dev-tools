@@ -17,7 +17,9 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "league/commonmark": "^2.8",
-        "symfony/yaml": "^7.4"
+        "symfony/event-dispatcher": "^7.0",
+        "symfony/string": "^7.0",
+        "symfony/yaml": "^7.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
