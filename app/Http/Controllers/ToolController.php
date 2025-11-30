@@ -45,6 +45,24 @@ class ToolController extends Controller
                 'route' => 'tools.base64',
                 'icon' => 'lock',
             ],
+            [
+                'name' => 'UUID Generator',
+                'description' => 'Generate, validate, and format UUIDs (v4)',
+                'route' => 'tools.uuid',
+                'icon' => 'fingerprint',
+            ],
+            [
+                'name' => 'Hash Generator',
+                'description' => 'Generate MD5, SHA-1, SHA-256, SHA-512 hashes',
+                'route' => 'tools.hash',
+                'icon' => 'hash',
+            ],
+            [
+                'name' => 'URL Encoder',
+                'description' => 'Encode/decode URLs and parse URL components',
+                'route' => 'tools.url',
+                'icon' => 'link',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -78,5 +96,20 @@ class ToolController extends Controller
     public function base64(): View
     {
         return view('tools.base64');
+    }
+
+    public function uuid(): View
+    {
+        return view('tools.uuid');
+    }
+
+    public function hash(): View
+    {
+        return view('tools.hash');
+    }
+
+    public function url(): View
+    {
+        return view('tools.url');
     }
 }

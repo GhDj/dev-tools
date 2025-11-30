@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2024-11-30
+
+### Added
+
+- **UUID Generator**: Generate, validate, and format UUIDs
+  - UUID v4 generation (single or bulk up to 100)
+  - Format options: lowercase, uppercase, no-hyphens, braces, URN
+  - UUID validation with version and variant detection
+
+- **Hash Generator**: Generate cryptographic hashes
+  - Supported algorithms: MD5, SHA-1, SHA-256, SHA-384, SHA-512
+  - Generate all hashes at once or select specific algorithm
+  - Hash verification with auto-detection of algorithm by length
+
+- **URL Encoder/Decoder**: Encode, decode, and parse URLs
+  - Component encoding (rawurlencode) and full encoding (urlencode)
+  - URL decoding
+  - URL parsing with query parameter extraction
+  - URL building from components
+
+### Changed
+
+- Updated home page to display all 9 tools
+- Updated version to v1.1.0
+- Deploy workflow now triggers on release publish instead of push to main
+
+### Technical Details
+
+- 66 new tests added (total: 270 tests, 719 assertions)
+- New service classes: UuidService, HashService, UrlEncoderService
+- New API endpoints: 7 new routes for UUID, Hash, and URL tools
+
 ## [1.0.0] - 2024-11-30
 
 ### Added
@@ -53,4 +85,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RESTful API endpoints for all tools
 - 146 tests with 386 assertions
 
+[1.1.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.1.0
 [1.0.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.0.0

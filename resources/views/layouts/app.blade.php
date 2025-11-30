@@ -84,7 +84,7 @@
                     <span>&copy; {{ date('Y') }}</span>
                     <a href="https://github.com/GhDj" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">Ghabri Djalel</a>
                 </div>
-                <span class="text-gray-500 dark:text-gray-500">v1.0.0</span>
+                <span class="text-gray-500 dark:text-gray-500">v1.1.0</span>
             </div>
         </div>
     </footer>
