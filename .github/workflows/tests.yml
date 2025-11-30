@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.1, 8.2, 8.3]
+        php: [8.2, 8.3, 8.4]
 
     name: PHP ${{ matrix.php }}
 
@@ -54,4 +54,4 @@ jobs:
           mkdir -p bootstrap/cache
 
       - name: Run tests
-        run: php artisan test --parallel
+        run: php artisan test
