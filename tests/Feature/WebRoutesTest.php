@@ -1,0 +1,249 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+
+class WebRoutesTest extends TestCase
+{
+    public function test_home_page_loads(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('Developer Tools');
+    }
+
+    public function test_home_page_displays_all_tools(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('CSV Converter');
+        $response->assertSee('YAML/JSON Converter');
+        $response->assertSee('Markdown Preview');
+        $response->assertSee('SQL Formatter');
+        $response->assertSee('Base64 Encoder');
+    }
+
+    public function test_home_page_has_tool_links(): void
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+        $response->assertSee('href="' . route('tools.csv') . '"', false);
+        $response->assertSee('href="' . route('tools.yaml') . '"', false);
+        $response->assertSee('href="' . route('tools.markdown') . '"', false);
+        $response->assertSee('href="' . route('tools.sql') . '"', false);
+        $response->assertSee('href="' . route('tools.base64') . '"', false);
+    }
+
+    public function test_csv_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/csv');
+
+        $response->assertStatus(200);
+        $response->assertSee('CSV Converter');
+        $response->assertSee('Convert CSV to JSON, SQL, or PHP arrays');
+    }
+
+    public function test_csv_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/csv');
+
+        $response->assertStatus(200);
+        // Has format options
+        $response->assertSee('JSON');
+        $response->assertSee('SQL INSERT');
+        $response->assertSee('PHP Array');
+        // Has delimiter options
+        $response->assertSee('Comma');
+        $response->assertSee('Semicolon');
+        // Has back link
+        $response->assertSee('Back');
+    }
+
+    public function test_yaml_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/yaml');
+
+        $response->assertStatus(200);
+        $response->assertSee('YAML/JSON Converter');
+        $response->assertSee('Convert between YAML and JSON');
+    }
+
+    public function test_yaml_tool_has_direction_buttons(): void
+    {
+        $response = $this->get('/tools/yaml');
+
+        $response->assertStatus(200);
+        $response->assertSee('YAML');
+        $response->assertSee('JSON');
+    }
+
+    public function test_markdown_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/markdown');
+
+        $response->assertStatus(200);
+        $response->assertSee('Markdown Preview');
+        $response->assertSee('Write Markdown and preview it as HTML');
+    }
+
+    public function test_markdown_tool_has_preview_area(): void
+    {
+        $response = $this->get('/tools/markdown');
+
+        $response->assertStatus(200);
+        $response->assertSee('Markdown Input');
+        $response->assertSee('Preview');
+    }
+
+    public function test_sql_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/sql');
+
+        $response->assertStatus(200);
+        $response->assertSee('SQL Formatter');
+        $response->assertSee('Format, beautify, or compress SQL queries');
+    }
+
+    public function test_sql_tool_has_action_buttons(): void
+    {
+        $response = $this->get('/tools/sql');
+
+        $response->assertStatus(200);
+        $response->assertSee('Format');
+        $response->assertSee('Compress');
+    }
+
+    public function test_base64_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/base64');
+
+        $response->assertStatus(200);
+        $response->assertSee('Base64 Encoder/Decoder');
+        $response->assertSee('Encode or decode text and files');
+    }
+
+    public function test_base64_tool_has_mode_toggle(): void
+    {
+        $response = $this->get('/tools/base64');
+
+        $response->assertStatus(200);
+        $response->assertSee('Text');
+        $response->assertSee('File Upload');
+    }
+
+    public function test_base64_tool_has_encode_decode_buttons(): void
+    {
+        $response = $this->get('/tools/base64');
+
+        $response->assertStatus(200);
+        $response->assertSee('Encode');
+        $response->assertSee('Decode');
+    }
+
+    public function test_all_pages_have_navigation(): void
+    {
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+
+        foreach ($pages as $page) {
+            $response = $this->get($page);
+            $response->assertStatus(200);
+            // All pages should have the nav with Dev Tools branding
+            $response->assertSee('Dev Tools');
+        }
+    }
+
+    public function test_all_pages_have_theme_toggle(): void
+    {
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+
+        foreach ($pages as $page) {
+            $response = $this->get($page);
+            $response->assertStatus(200);
+            // Theme toggle uses darkMode Alpine.js variable
+            $response->assertSee('darkMode', false);
+        }
+    }
+
+    public function test_all_pages_load_tailwind_cdn(): void
+    {
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+
+        foreach ($pages as $page) {
+            $response = $this->get($page);
+            $response->assertStatus(200);
+            $response->assertSee('cdn.tailwindcss.com', false);
+        }
+    }
+
+    public function test_all_pages_load_alpine_cdn(): void
+    {
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+
+        foreach ($pages as $page) {
+            $response = $this->get($page);
+            $response->assertStatus(200);
+            $response->assertSee('alpinejs', false);
+        }
+    }
+
+    public function test_all_tool_pages_have_back_link(): void
+    {
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+
+        foreach ($toolPages as $page) {
+            $response = $this->get($page);
+            $response->assertStatus(200);
+            $response->assertSee('Back');
+        }
+    }
+
+    public function test_nonexistent_route_returns_404(): void
+    {
+        $response = $this->get('/nonexistent-page');
+        $response->assertStatus(404);
+    }
+
+    public function test_nonexistent_tool_returns_404(): void
+    {
+        $response = $this->get('/tools/nonexistent');
+        $response->assertStatus(404);
+    }
+
+    public function test_health_check_endpoint(): void
+    {
+        $response = $this->get('/up');
+        $response->assertStatus(200);
+    }
+
+    public function test_api_routes_reject_get_requests(): void
+    {
+        $apiRoutes = [
+            '/api/v1/csv/convert',
+            '/api/v1/yaml/convert',
+            '/api/v1/markdown/convert',
+            '/api/v1/sql/format',
+            '/api/v1/base64/encode',
+            '/api/v1/base64/decode',
+        ];
+
+        foreach ($apiRoutes as $route) {
+            $response = $this->getJson($route);
+            $response->assertStatus(405); // Method Not Allowed
+        }
+    }
+
+    public function test_pages_have_csrf_token(): void
+    {
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+
+        foreach ($pages as $page) {
+            $response = $this->get($page);
+            $response->assertStatus(200);
+            $response->assertSee('csrf-token', false);
+        }
+    }
+}

@@ -1,0 +1,12 @@
+# This file is for shared hosting where the entire Laravel app
+# is uploaded to public_html and you cannot change the document root.
+#
+# If your host allows setting document root to /public, use that instead
+# and you don't need this file.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Redirect all requests to public folder
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
