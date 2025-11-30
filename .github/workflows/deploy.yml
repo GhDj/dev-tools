@@ -90,8 +90,6 @@ jobs:
           rm -f .editorconfig
           rm -f vite.config.js
           rm -f package.json
-          rm -f SESSION_SUMMARY.md
-          rm -f TESTING.md
 
       - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
