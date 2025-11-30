@@ -77,6 +77,18 @@
         @yield('content')
     </main>
 
+    <footer class="border-t border-gray-200 dark:border-dark-border mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-600 dark:text-gray-400">
+                <div class="flex items-center space-x-1">
+                    <span>&copy; {{ date('Y') }}</span>
+                    <a href="https://github.com/GhDj" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">Ghabri Djalel</a>
+                </div>
+                <span class="text-gray-500 dark:text-gray-500">v1.0.0</span>
+            </div>
+        </div>
+    </footer>
+
     <script>
         const DevTools = {
             csrfToken: document.querySelector('meta[name="csrf-token"]').content,
