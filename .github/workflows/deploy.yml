@@ -1,34 +1,18 @@
 name: Deploy to Production
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
-    inputs:
-      confirm:
-        description: 'Type "deploy" to confirm deployment to production'
-        required: true
-        type: string
 
 jobs:
-  validate:
-    runs-on: ubuntu-latest
-    name: Validate Deployment
-    steps:
-      - name: Check confirmation
-        if: ${{ github.event.inputs.confirm != 'deploy' }}
-        run: |
-          echo "Deployment not confirmed. Please type 'deploy' to confirm."
-          exit 1
-
   tests:
     runs-on: ubuntu-latest
-    needs: validate
     name: Run Tests
 
     steps:
-      - name: Checkout develop branch
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: develop
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -72,10 +56,8 @@ jobs:
     name: Deploy via SFTP
 
     steps:
-      - name: Checkout develop branch
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: develop
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
