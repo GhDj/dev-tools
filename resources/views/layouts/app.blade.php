@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" x-init="$watch('darkMode', val => localStorage.setItem('darkMode', val))" :class="{ 'dark': darkMode }">
+<html lang="en" x-data="{
+    darkMode: localStorage.getItem('darkMode') !== null
+        ? localStorage.getItem('darkMode') === 'true'
+        : window.matchMedia('(prefers-color-scheme: dark)').matches
+}" x-init="
+    $watch('darkMode', val => localStorage.setItem('darkMode', val));
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (localStorage.getItem('darkMode') === null) darkMode = e.matches;
+    });
+" :class="{ 'dark': darkMode }">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
