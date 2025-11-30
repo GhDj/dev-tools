@@ -69,24 +69,26 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: tests
-    name: Create Deploy PR
+    name: Deploy via SFTP
 
     steps:
       - name: Checkout develop branch
         uses: actions/checkout@v4
         with:
           ref: develop
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Git
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: mbstring, xml, ctype, json
+
+      - name: Install production dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction
 
       - name: Prepare production files
         run: |
-          # Remove dev-only files
+          # Remove dev/test files
           rm -rf tests
           rm -f phpunit.xml
           rm -f .editorconfig
@@ -94,22 +96,31 @@ jobs:
           rm -f package.json
           rm -f .phpunit.result.cache
 
-      - name: Create deploy branch and PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          BRANCH_NAME="deploy/$(date +%Y%m%d-%H%M%S)"
-          git checkout -b $BRANCH_NAME
-          git add -A
-          git commit -m "Deploy: sync from develop"
-          git push origin $BRANCH_NAME
-          gh pr create --base main --head $BRANCH_NAME --title "Deploy to production" --body "Automated deployment from develop branch.
+          # Remove git files
+          rm -rf .git
+          rm -rf .github
+          rm -f .gitignore
+          rm -f .gitattributes
 
-          This PR contains production-ready code with dev files removed.
+          # Remove documentation
+          rm -f README.md
+          rm -f CHANGELOG.md
 
-          **Removed files:**
-          - tests/
-          - phpunit.xml
-          - .editorconfig
-          - vite.config.js
-          - package.json"
+          # Remove composer files (vendor already installed)
+          rm -f composer.json
+          rm -f composer.lock
+
+          # Remove other unnecessary files
+          rm -f .env.example
+          rm -f deploy.sh
+
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          server: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          local_path: "./*"
+          remote_path: ${{ secrets.SFTP_PATH }}
+          sftp_only: true
+          delete_remote_files: false
