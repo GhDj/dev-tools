@@ -22,6 +22,12 @@ class ToolController extends Controller
                 'icon' => 'code',
             ],
             [
+                'name' => 'JSON Parser',
+                'description' => 'Format, minify, validate, and repair JSON data',
+                'route' => 'tools.json',
+                'icon' => 'json',
+            ],
+            [
                 'name' => 'Markdown Preview',
                 'description' => 'Preview Markdown as HTML with export option',
                 'route' => 'tools.markdown',
@@ -52,6 +58,11 @@ class ToolController extends Controller
     public function yaml(): View
     {
         return view('tools.yaml');
+    }
+
+    public function json(): View
+    {
+        return view('tools.json');
     }
 
     public function markdown(): View
