@@ -24,6 +24,9 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Markdown Preview');
         $response->assertSee('SQL Formatter');
         $response->assertSee('Base64 Encoder');
+        $response->assertSee('UUID Generator');
+        $response->assertSee('Hash Generator');
+        $response->assertSee('URL Encoder');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -36,6 +39,9 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.markdown') . '"', false);
         $response->assertSee('href="' . route('tools.sql') . '"', false);
         $response->assertSee('href="' . route('tools.base64') . '"', false);
+        $response->assertSee('href="' . route('tools.uuid') . '"', false);
+        $response->assertSee('href="' . route('tools.hash') . '"', false);
+        $response->assertSee('href="' . route('tools.url') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -144,9 +150,66 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Decode');
     }
 
+    public function test_uuid_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/uuid');
+
+        $response->assertStatus(200);
+        $response->assertSee('UUID Generator');
+        $response->assertSee('Generate, validate, and format UUIDs');
+    }
+
+    public function test_uuid_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/uuid');
+
+        $response->assertStatus(200);
+        $response->assertSee('Generate UUID');
+        $response->assertSee('Validate');
+        $response->assertSee('Format');
+    }
+
+    public function test_hash_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/hash');
+
+        $response->assertStatus(200);
+        $response->assertSee('Hash Generator');
+        $response->assertSee('MD5');
+        $response->assertSee('SHA-256');
+    }
+
+    public function test_hash_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/hash');
+
+        $response->assertStatus(200);
+        $response->assertSee('Generate All Hashes');
+        $response->assertSee('Verify');
+    }
+
+    public function test_url_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/url');
+
+        $response->assertStatus(200);
+        $response->assertSee('URL Encoder/Decoder');
+        $response->assertSee('Encode, decode, and parse URLs');
+    }
+
+    public function test_url_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/url');
+
+        $response->assertStatus(200);
+        $response->assertSee('Encode');
+        $response->assertSee('Decode');
+        $response->assertSee('Parse URL');
+    }
+
     public function test_all_pages_have_navigation(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -158,7 +221,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_have_theme_toggle(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -170,7 +233,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_load_tailwind_cdn(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -181,7 +244,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_load_alpine_cdn(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -192,7 +255,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_tool_pages_have_back_link(): void
     {
-        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
@@ -228,6 +291,13 @@ class WebRoutesTest extends TestCase
             '/api/v1/sql/format',
             '/api/v1/base64/encode',
             '/api/v1/base64/decode',
+            '/api/v1/uuid/generate',
+            '/api/v1/uuid/validate',
+            '/api/v1/hash/generate',
+            '/api/v1/hash/verify',
+            '/api/v1/url/encode',
+            '/api/v1/url/decode',
+            '/api/v1/url/parse',
         ];
 
         foreach ($apiRoutes as $route) {
@@ -238,7 +308,7 @@ class WebRoutesTest extends TestCase
 
     public function test_pages_have_csrf_token(): void
     {
-        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
