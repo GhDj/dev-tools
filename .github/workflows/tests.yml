@@ -53,5 +53,17 @@ jobs:
           mkdir -p storage/logs
           mkdir -p bootstrap/cache
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
       - name: Run tests
         run: php artisan test
