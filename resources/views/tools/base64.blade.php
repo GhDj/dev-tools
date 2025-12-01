@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'Base64 Encoder/Decoder - Dev Tools')
+@section('title', 'Base64 Encoder/Decoder - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online Base64 encoder and decoder. Encode or decode text and files to/from Base64 instantly. Supports file uploads up to 5MB.')
+@section('meta_keywords', 'base64 encoder, base64 decoder, encode base64, decode base64, base64 online, file to base64, free base64 tool')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "Base64 Encoder/Decoder",
+    "description": "Encode or decode text and files to/from Base64",
+    "url": "{{ route('tools.base64') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="base64Tool()" class="space-y-6">

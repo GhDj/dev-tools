@@ -13,7 +13,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Dev Tools')</title>
+    <title>@yield('title', 'Dev Tools - Free Online Developer Utilities')</title>
+    <meta name="description" content="@yield('meta_description', 'Free online developer tools for JSON formatting, CSV conversion, Base64 encoding, UUID generation, hash generation, SQL formatting, and more. No signup required.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'developer tools, json formatter, csv converter, base64 encoder, uuid generator, hash generator, sql formatter, online tools')">
+    <meta name="author" content="Ghabri Djalel">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title', 'Dev Tools - Free Online Developer Utilities')">
+    <meta property="og:description" content="@yield('meta_description', 'Free online developer tools for JSON formatting, CSV conversion, Base64 encoding, UUID generation, and more.')">
+    <meta property="og:site_name" content="Dev Tools">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('title', 'Dev Tools - Free Online Developer Utilities')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Free online developer tools for JSON formatting, CSV conversion, Base64 encoding, UUID generation, and more.')">
+
+    <!-- JSON-LD Structured Data -->
+    @stack('schema')
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script>

@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'URL Encoder/Decoder - Dev Tools')
+@section('title', 'URL Encoder/Decoder & Parser - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online URL encoder, decoder, and parser. URL encode/decode strings, parse URLs into components, and build URLs from parts. Supports both component and full encoding.')
+@section('meta_keywords', 'url encoder, url decoder, urlencode, urldecode, url parser, parse url online, encode url, free url tool')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "URL Encoder/Decoder",
+    "description": "Encode, decode, and parse URLs",
+    "url": "{{ route('tools.url') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="urlTool()" class="space-y-6">

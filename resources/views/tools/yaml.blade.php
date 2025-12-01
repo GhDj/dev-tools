@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'YAML/JSON Converter - Dev Tools')
+@section('title', 'YAML to JSON Converter - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online YAML/JSON converter. Convert YAML to JSON or JSON to YAML instantly. Validates input and produces clean, formatted output.')
+@section('meta_keywords', 'yaml to json, json to yaml, yaml converter, json converter, yaml parser, convert yaml online, free yaml tool')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "YAML/JSON Converter",
+    "description": "Convert between YAML and JSON formats bidirectionally",
+    "url": "{{ route('tools.yaml') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="yamlConverter()" class="space-y-6">

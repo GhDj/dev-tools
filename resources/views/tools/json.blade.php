@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'JSON Parser - Dev Tools')
+@section('title', 'JSON Formatter & Validator - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online JSON formatter, validator, and minifier. Format, beautify, minify, validate, and repair JSON data instantly. See detailed stats and error messages.')
+@section('meta_keywords', 'json formatter, json validator, json beautifier, json minifier, format json online, validate json, json parser, free json tool')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "JSON Parser",
+    "description": "Format, minify, validate, and repair JSON data",
+    "url": "{{ route('tools.json') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="jsonParser()" class="space-y-6">
