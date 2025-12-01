@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'Hash Generator - Dev Tools')
+@section('title', 'Hash Generator (MD5, SHA-256, SHA-512) - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online hash generator. Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes instantly. Verify hashes with auto-detection of algorithm.')
+@section('meta_keywords', 'hash generator, md5 generator, sha256 generator, sha512 hash, generate hash online, hash calculator, checksum generator, free hash tool')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "Hash Generator",
+    "description": "Generate MD5, SHA-1, SHA-256, SHA-384, SHA-512 hashes",
+    "url": "{{ route('tools.hash') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="hashTool()" class="space-y-6">

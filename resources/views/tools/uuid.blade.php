@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'UUID Generator - Dev Tools')
+@section('title', 'UUID Generator - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online UUID v4 generator. Generate single or bulk UUIDs with format options: lowercase, uppercase, no-hyphens, braces, URN. Validate existing UUIDs.')
+@section('meta_keywords', 'uuid generator, generate uuid, uuid v4, bulk uuid generator, uuid validator, random uuid, guid generator, free uuid tool')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "UUID Generator",
+    "description": "Generate, validate, and format UUIDs (v4)",
+    "url": "{{ route('tools.uuid') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="uuidTool()" class="space-y-6">

@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'SQL Formatter - Dev Tools')
+@section('title', 'SQL Formatter & Beautifier - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online SQL formatter and beautifier. Format, beautify, or minify SQL queries instantly. Supports complex queries with JOINs, subqueries, and more.')
+@section('meta_keywords', 'sql formatter, sql beautifier, format sql online, sql minifier, beautify sql, sql pretty print, free sql formatter')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "SQL Formatter",
+    "description": "Format, beautify, or compress SQL queries",
+    "url": "{{ route('tools.sql') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="sqlFormatter()" class="space-y-6">

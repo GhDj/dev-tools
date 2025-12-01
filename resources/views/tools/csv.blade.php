@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'CSV Converter - Dev Tools')
+@section('title', 'CSV to JSON/SQL Converter - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online CSV converter. Convert CSV to JSON, SQL INSERT statements, or PHP arrays instantly. Supports custom delimiters, handles quoted fields and Unicode.')
+@section('meta_keywords', 'csv converter, csv to json, csv to sql, csv to php array, convert csv online, free csv converter, csv parser')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "CSV Converter",
+    "description": "Convert CSV to JSON, SQL INSERT statements, or PHP arrays",
+    "url": "{{ route('tools.csv') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div x-data="csvConverter()" class="space-y-6">

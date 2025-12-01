@@ -1,6 +1,31 @@
 @extends('layouts.app')
 
-@section('title', 'Markdown Preview - Dev Tools')
+@section('title', 'Markdown to HTML Preview - Free Online Tool | Dev Tools')
+@section('meta_description', 'Free online Markdown preview and converter. See live HTML preview of your Markdown with GitHub Flavored Markdown support. Export to HTML instantly.')
+@section('meta_keywords', 'markdown preview, markdown to html, markdown converter, gfm preview, github markdown, markdown editor online, free markdown tool')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "SoftwareApplication",
+    "name": "Markdown Preview",
+    "description": "Preview Markdown as HTML with GitHub Flavored Markdown support",
+    "url": "{{ route('tools.markdown') }}",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "offers": {
+        "@@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    },
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel"
+    }
+}
+</script>
+@endpush
 
 @push('styles')
 <style>

@@ -1,6 +1,25 @@
 @extends('layouts.app')
 
-@section('title', 'Dev Tools - Developer Utilities')
+@section('title', 'Dev Tools - Free Online Developer Utilities')
+@section('meta_description', 'Free online developer tools: JSON formatter, CSV to SQL converter, Base64 encoder, UUID generator, hash generator, markdown preview, and more. No signup, no data stored.')
+@section('meta_keywords', 'developer tools, json formatter, csv converter, base64 encoder, uuid generator, hash generator, sql formatter, yaml converter, markdown preview, online tools, free tools')
+
+@push('schema')
+<script type="application/ld+json">
+{
+    "@@context": "https://schema.org",
+    "@@type": "WebSite",
+    "name": "Dev Tools",
+    "url": "{{ url('/') }}",
+    "description": "Free online developer utilities for everyday coding tasks",
+    "author": {
+        "@@type": "Person",
+        "name": "Ghabri Djalel",
+        "url": "https://github.com/GhDj"
+    }
+}
+</script>
+@endpush
 
 @section('content')
 <div class="text-center mb-12">
