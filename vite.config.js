@@ -10,4 +10,9 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    build: {
+        // Ensure assets are built to public/build
+        outDir: 'public/build',
+        manifest: 'manifest.json',
+    },
 });
