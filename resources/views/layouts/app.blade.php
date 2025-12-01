@@ -41,33 +41,8 @@
 
     <!-- JSON-LD Structured Data -->
     @stack('schema')
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        dark: {
-                            bg: '#0f172a',
-                            card: '#1e293b',
-                            border: '#334155',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        [x-cloak] { display: none !important; }
-        .textarea-code {
-            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-            font-size: 13px;
-            line-height: 1.5;
-            tab-size: 2;
-        }
-    </style>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
 <body class="min-h-screen bg-gray-50 dark:bg-dark-bg transition-colors duration-200">

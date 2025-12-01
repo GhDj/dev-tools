@@ -231,25 +231,15 @@ class WebRoutesTest extends TestCase
         }
     }
 
-    public function test_all_pages_load_tailwind_cdn(): void
+    public function test_all_pages_load_vite_assets(): void
     {
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
             $response->assertStatus(200);
-            $response->assertSee('cdn.tailwindcss.com', false);
-        }
-    }
-
-    public function test_all_pages_load_alpine_cdn(): void
-    {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
-
-        foreach ($pages as $page) {
-            $response = $this->get($page);
-            $response->assertStatus(200);
-            $response->assertSee('alpinejs', false);
+            // Vite assets are loaded via @vite directive
+            $response->assertSee('build/assets/app', false);
         }
     }
 
