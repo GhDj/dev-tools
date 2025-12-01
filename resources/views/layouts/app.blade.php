@@ -13,34 +13,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Dev Tools')</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        dark: {
-                            bg: '#0f172a',
-                            card: '#1e293b',
-                            border: '#334155',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        [x-cloak] { display: none !important; }
-        .textarea-code {
-            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
-            font-size: 13px;
-            line-height: 1.5;
-            tab-size: 2;
-        }
-    </style>
+    <title>@yield('title', 'Dev Tools - Free Online Developer Utilities')</title>
+    <meta name="description" content="@yield('meta_description', 'Free online developer tools for JSON formatting, CSV conversion, Base64 encoding, UUID generation, hash generation, SQL formatting, and more. No signup required.')">
+    <meta name="keywords" content="@yield('meta_keywords', 'developer tools, json formatter, csv converter, base64 encoder, uuid generator, hash generator, sql formatter, online tools')">
+    <meta name="author" content="Ghabri Djalel">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.svg') }}">
+    <meta name="theme-color" content="#4f46e5">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="@yield('title', 'Dev Tools - Free Online Developer Utilities')">
+    <meta property="og:description" content="@yield('meta_description', 'Free online developer tools for JSON formatting, CSV conversion, Base64 encoding, UUID generation, and more.')">
+    <meta property="og:site_name" content="Dev Tools">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="{{ url()->current() }}">
+    <meta name="twitter:title" content="@yield('title', 'Dev Tools - Free Online Developer Utilities')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Free online developer tools for JSON formatting, CSV conversion, Base64 encoding, UUID generation, and more.')">
+
+    <!-- JSON-LD Structured Data -->
+    @stack('schema')
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
 <body class="min-h-screen bg-gray-50 dark:bg-dark-bg transition-colors duration-200">
@@ -84,7 +86,7 @@
                     <span>&copy; {{ date('Y') }}</span>
                     <a href="https://github.com/GhDj" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">Ghabri Djalel</a>
                 </div>
-                <span class="text-gray-500 dark:text-gray-500">v1.0.0</span>
+                <span class="text-gray-500 dark:text-gray-500">v1.1.0</span>
             </div>
         </div>
     </footer>
