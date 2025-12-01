@@ -39,6 +39,15 @@
     <meta name="twitter:title" content="@yield('title', 'Dev Tools - Free Online Developer Utilities')">
     <meta name="twitter:description" content="@yield('meta_description', 'Free online developer tools for JSON formatting, CSV conversion, Base64 encoding, UUID generation, and more.')">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-99SGEVL1J9"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-99SGEVL1J9');
+    </script>
     <!-- JSON-LD Structured Data -->
     @stack('schema')
 
@@ -86,7 +95,12 @@
                     <span>&copy; {{ date('Y') }}</span>
                     <a href="https://github.com/GhDj" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">Ghabri Djalel</a>
                 </div>
-                <span class="text-gray-500 dark:text-gray-500">v1.1.0</span>
+                <div class="flex items-center space-x-4">
+                    <a href="{{ route('about') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a>
+                    <a href="{{ route('privacy') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Privacy</a>
+                    <a href="https://github.com/GhDj/dev-tools" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">GitHub</a>
+                    <span class="text-gray-500 dark:text-gray-500">v1.1.0</span>
+                </div>
             </div>
         </div>
     </footer>
