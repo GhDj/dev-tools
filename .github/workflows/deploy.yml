@@ -23,14 +23,28 @@ jobs:
       - name: Install production dependencies
         run: composer install --no-dev --optimize-autoloader --no-interaction
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Build assets
+        run: npm run build
+
       - name: Prepare production files
         run: |
           # Remove dev/test files
           rm -rf tests
+          rm -rf node_modules
           rm -f phpunit.xml
           rm -f .editorconfig
           rm -f vite.config.js
           rm -f package.json
+          rm -f package-lock.json
           rm -f .phpunit.result.cache
 
           # Remove git files
@@ -46,6 +60,10 @@ jobs:
           # Remove composer files (vendor already installed)
           rm -f composer.json
           rm -f composer.lock
+
+          # Remove source assets (compiled assets are in public/build)
+          rm -rf resources/css
+          rm -rf resources/js
 
           # Remove other unnecessary files
           rm -f .env.example
