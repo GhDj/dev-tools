@@ -214,8 +214,8 @@ class WebRoutesTest extends TestCase
         $response = $this->get('/tools/code-editor');
 
         $response->assertStatus(200);
-        $response->assertSee('Code Editor');
-        $response->assertSee('Write HTML, CSS, JS with live preview');
+        $response->assertSee('Dev Tools');
+        $response->assertSee('Online Code Editor');
     }
 
     public function test_code_editor_has_required_elements(): void
@@ -227,7 +227,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('style.css');
         $response->assertSee('script.js');
         $response->assertSee('Preview');
-        $response->assertSee('monaco-editor');
+        $response->assertSee('monaco-container');
     }
 
     public function test_all_pages_have_navigation(): void
@@ -256,19 +256,21 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_load_vite_assets(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
+        // Code editor uses standalone template without Vite
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
             $response->assertStatus(200);
-            // Vite assets are loaded via @vite directive
-            $response->assertSee('build/assets/app', false);
+            // Vite assets are loaded via @vite directive (with hash in filename)
+            $response->assertSee('assets/app-', false);
         }
     }
 
     public function test_all_tool_pages_have_back_link(): void
     {
-        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
+        // Code editor uses standalone template with home link instead of back
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
