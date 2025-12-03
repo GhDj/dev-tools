@@ -221,6 +221,7 @@
             display: flex;
             background: var(--bg-tertiary);
             border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
         }
 
         .tab {
@@ -232,6 +233,10 @@
             border-bottom: 2px solid transparent;
             cursor: pointer;
             transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
         }
 
         .tab:hover {
@@ -243,6 +248,40 @@
             color: var(--accent);
             background: var(--bg-secondary);
             border-bottom-color: var(--accent);
+        }
+
+        .tab-close {
+            display: none;
+            width: 16px;
+            height: 16px;
+            line-height: 14px;
+            text-align: center;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .tab:hover .tab-close {
+            display: inline-block;
+        }
+
+        .tab-close:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .tab-add {
+            padding: 0.75rem 1rem;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .tab-add:hover {
+            color: var(--accent);
+            background: var(--bg-secondary);
         }
 
         /* Monaco Container */
@@ -283,10 +322,118 @@
             background: #15803d;
         }
 
+        .preview-container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
         #preview-frame {
             flex: 1;
             border: none;
             background: white;
+        }
+
+        /* Console Panel */
+        .console-panel {
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            max-height: 200px;
+            transition: max-height 0.2s;
+        }
+
+        .console-panel.collapsed {
+            max-height: 32px;
+        }
+
+        .console-panel.collapsed .console-output {
+            display: none;
+        }
+
+        .console-panel.collapsed #btn-toggle-console svg {
+            transform: rotate(180deg);
+        }
+
+        .console-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .console-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-console {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-console:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .console-output {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0.5rem;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.75rem;
+            background: var(--bg-secondary);
+        }
+
+        .console-line {
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .console-line.log {
+            color: var(--text-primary);
+        }
+
+        .console-line.info {
+            color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .console-line.warn {
+            color: #f59e0b;
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .console-line.error {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .console-line-prefix {
+            opacity: 0.6;
+            min-width: 40px;
+        }
+
+        .console-line-content {
+            flex: 1;
+            word-break: break-all;
         }
 
         /* Status Bar */
@@ -334,6 +481,164 @@
         @keyframes slideIn {
             from { transform: translateY(100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: 0.75rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .modal-sm {
+            max-width: 400px;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .modal-body {
+            padding: 1.25rem;
+            overflow-y: auto;
+            max-height: 60vh;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Shortcuts Modal */
+        .shortcut-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .shortcut-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .shortcut-section h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .shortcut-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .shortcut-row:last-child {
+            border-bottom: none;
+        }
+
+        .keys {
+            display: flex;
+            gap: 0.25rem;
+        }
+
+        kbd {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.25rem;
+            font-family: inherit;
+            font-size: 0.75rem;
+        }
+
+        /* New File Modal */
+        .modal-body label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body input[type="text"] {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.875rem;
+        }
+
+        .modal-body input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .modal-body .hint {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
         }
 
         /* Responsive */
