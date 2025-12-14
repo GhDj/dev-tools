@@ -29,6 +29,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('URL Encoder');
         $response->assertSee('Code Editor');
         $response->assertSee('Regex Tester');
+        $response->assertSee('HTML Entity Encoder');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -46,6 +47,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.url') . '"', false);
         $response->assertSee('href="' . route('tools.code-editor') . '"', false);
         $response->assertSee('href="' . route('tools.regex') . '"', false);
+        $response->assertSee('href="' . route('tools.html-entity') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -252,9 +254,29 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Match Details');
     }
 
+    public function test_html_entity_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/html-entity');
+
+        $response->assertStatus(200);
+        $response->assertSee('HTML Entity Encoder/Decoder');
+        $response->assertSee('Encode special characters to HTML entities or decode them back to text');
+    }
+
+    public function test_html_entity_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/html-entity');
+
+        $response->assertStatus(200);
+        $response->assertSee('Encode');
+        $response->assertSee('Decode');
+        $response->assertSee('Common HTML Entities');
+        $response->assertSee('Entity Reference');
+    }
+
     public function test_all_pages_have_navigation(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/html-entity'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -266,7 +288,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_have_theme_toggle(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/html-entity'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -279,7 +301,7 @@ class WebRoutesTest extends TestCase
     public function test_all_pages_load_vite_assets(): void
     {
         // Code editor uses standalone template without Vite
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/html-entity'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -292,7 +314,7 @@ class WebRoutesTest extends TestCase
     public function test_all_tool_pages_have_back_link(): void
     {
         // Code editor uses standalone template with home link instead of back
-        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/html-entity'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
@@ -345,7 +367,7 @@ class WebRoutesTest extends TestCase
 
     public function test_pages_have_csrf_token(): void
     {
-        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/html-entity'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);

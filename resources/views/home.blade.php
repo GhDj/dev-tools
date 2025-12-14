@@ -90,6 +90,11 @@
                             <circle cx="12" cy="12" r="4" stroke-width="2"/>
                         </svg>
                         @break
+                    @case('html-entity')
+                        <svg class="w-6 h-6 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                        @break
                 @endswitch
             </div>
             <div class="flex-1 min-w-0">

@@ -75,6 +75,12 @@ class ToolController extends Controller
                 'route' => 'tools.regex',
                 'icon' => 'regex',
             ],
+            [
+                'name' => 'HTML Entity Encoder',
+                'description' => 'Encode/decode HTML entities and special characters',
+                'route' => 'tools.html-entity',
+                'icon' => 'html-entity',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -133,5 +139,10 @@ class ToolController extends Controller
     public function regex(): View
     {
         return view('tools.regex');
+    }
+
+    public function htmlEntity(): View
+    {
+        return view('tools.html-entity');
     }
 }
