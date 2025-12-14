@@ -81,6 +81,12 @@ class ToolController extends Controller
                 'route' => 'tools.base-converter',
                 'icon' => 'calculator',
             ],
+            [
+                'name' => 'Slug Generator',
+                'description' => 'Convert text to URL-friendly slugs',
+                'route' => 'tools.slug-generator',
+                'icon' => 'slug',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -144,5 +150,10 @@ class ToolController extends Controller
     public function baseConverter(): View
     {
         return view('tools.base-converter');
+    }
+
+    public function slugGenerator(): View
+    {
+        return view('tools.slug-generator');
     }
 }
