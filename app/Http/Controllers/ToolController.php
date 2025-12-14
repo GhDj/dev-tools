@@ -75,6 +75,12 @@ class ToolController extends Controller
                 'route' => 'tools.regex',
                 'icon' => 'regex',
             ],
+            [
+                'name' => 'Base Converter',
+                'description' => 'Convert between binary, octal, decimal, and hex',
+                'route' => 'tools.base-converter',
+                'icon' => 'calculator',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -133,5 +139,10 @@ class ToolController extends Controller
     public function regex(): View
     {
         return view('tools.regex');
+    }
+
+    public function baseConverter(): View
+    {
+        return view('tools.base-converter');
     }
 }
