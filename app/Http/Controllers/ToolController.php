@@ -112,6 +112,10 @@ class ToolController extends Controller
                 'description' => 'Generate secure random passwords',
                 'route' => 'tools.password',
                 'icon' => 'key',
+                'name' => 'Lorem Ipsum Generator',
+                'description' => 'Generate placeholder text for designs',
+                'route' => 'tools.lorem',
+                'icon' => 'text',
             ],
         ];
 
@@ -202,5 +206,8 @@ class ToolController extends Controller
     public function password(): View
     {
         return view('tools.password-generator');
+    public function lorem(): View
+    {
+        return view('tools.lorem-ipsum');
     }
 }

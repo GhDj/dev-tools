@@ -39,6 +39,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('HTML Entity Encoder');
         $response->assertSee('Text Case Converter');
         $response->assertSee('Password Generator');
+        $response->assertSee('Lorem Ipsum Generator');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -66,6 +67,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.html-entity') . '"', false);
         $response->assertSee('href="' . route('tools.text-case') . '"', false);
         $response->assertSee('href="' . route('tools.password') . '"', false);
+        $response->assertSee('href="' . route('tools.lorem') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -406,6 +408,24 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Strength');
         $response->assertSee('Options');
         $response->assertSee('Quick Presets');
+    public function test_lorem_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/lorem');
+
+        $response->assertStatus(200);
+        $response->assertSee('Lorem Ipsum Generator');
+        $response->assertSee('Generate placeholder text');
+    }
+
+    public function test_lorem_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/lorem');
+
+        $response->assertStatus(200);
+        $response->assertSee('Paragraphs');
+        $response->assertSee('Sentences');
+        $response->assertSee('Words');
+        $response->assertSee('Generate');
     }
 
     public function test_all_pages_have_navigation(): void
@@ -413,6 +433,7 @@ class WebRoutesTest extends TestCase
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/text-case'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/password'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/lorem'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -427,6 +448,7 @@ class WebRoutesTest extends TestCase
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/text-case'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/password'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/lorem'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -442,6 +464,7 @@ class WebRoutesTest extends TestCase
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/text-case'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/password'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/lorem'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -457,6 +480,7 @@ class WebRoutesTest extends TestCase
         $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/text-case'];
         $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/password'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/lorem'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
@@ -512,6 +536,7 @@ class WebRoutesTest extends TestCase
         $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/text-case'];
         $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/password'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/lorem'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
