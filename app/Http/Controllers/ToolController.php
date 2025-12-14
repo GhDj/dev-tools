@@ -141,6 +141,12 @@ class ToolController extends Controller
                 'route' => 'tools.timestamp',
                 'icon' => 'timestamp',
             ],
+            [
+                'name' => 'Diff Checker',
+                'description' => 'Compare two texts and highlight differences',
+                'route' => 'tools.diff',
+                'icon' => 'diff',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -254,5 +260,10 @@ class ToolController extends Controller
     public function timestamp(): View
     {
         return view('tools.timestamp');
+    }
+
+    public function diff(): View
+    {
+        return view('tools.diff');
     }
 }
