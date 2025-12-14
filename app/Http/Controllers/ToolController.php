@@ -129,6 +129,12 @@ class ToolController extends Controller
                 'route' => 'tools.cron',
                 'icon' => 'clock',
             ],
+            [
+                'name' => 'JWT Decoder',
+                'description' => 'Decode and inspect JSON Web Tokens',
+                'route' => 'tools.jwt',
+                'icon' => 'jwt',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -232,5 +238,10 @@ class ToolController extends Controller
     public function cron(): View
     {
         return view('tools.cron-parser');
+    }
+
+    public function jwt(): View
+    {
+        return view('tools.jwt');
     }
 }
