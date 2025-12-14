@@ -69,6 +69,12 @@ class ToolController extends Controller
                 'route' => 'tools.code-editor',
                 'icon' => 'editor',
             ],
+            [
+                'name' => 'Lorem Ipsum Generator',
+                'description' => 'Generate placeholder text for designs',
+                'route' => 'tools.lorem',
+                'icon' => 'text',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -122,5 +128,10 @@ class ToolController extends Controller
     public function codeEditor(): View
     {
         return view('tools.code-editor');
+    }
+
+    public function lorem(): View
+    {
+        return view('tools.lorem-ipsum');
     }
 }
