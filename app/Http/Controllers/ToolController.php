@@ -75,6 +75,12 @@ class ToolController extends Controller
                 'route' => 'tools.regex',
                 'icon' => 'regex',
             ],
+            [
+                'name' => 'QR Code Generator',
+                'description' => 'Generate QR codes for URLs, text, and more',
+                'route' => 'tools.qr-code',
+                'icon' => 'qrcode',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -133,5 +139,10 @@ class ToolController extends Controller
     public function regex(): View
     {
         return view('tools.regex');
+    }
+
+    public function qrCode(): View
+    {
+        return view('tools.qr-code');
     }
 }
