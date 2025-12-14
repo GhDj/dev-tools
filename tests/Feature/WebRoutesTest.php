@@ -27,6 +27,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('UUID Generator');
         $response->assertSee('Hash Generator');
         $response->assertSee('URL Encoder');
+        $response->assertSee('Code Editor');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -42,6 +43,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.uuid') . '"', false);
         $response->assertSee('href="' . route('tools.hash') . '"', false);
         $response->assertSee('href="' . route('tools.url') . '"', false);
+        $response->assertSee('href="' . route('tools.code-editor') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -207,9 +209,30 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Parse URL');
     }
 
+    public function test_code_editor_page_loads(): void
+    {
+        $response = $this->get('/tools/code-editor');
+
+        $response->assertStatus(200);
+        $response->assertSee('Dev Tools');
+        $response->assertSee('Online Code Editor');
+    }
+
+    public function test_code_editor_has_required_elements(): void
+    {
+        $response = $this->get('/tools/code-editor');
+
+        $response->assertStatus(200);
+        $response->assertSee('index.html');
+        $response->assertSee('style.css');
+        $response->assertSee('script.js');
+        $response->assertSee('Preview');
+        $response->assertSee('monaco-container');
+    }
+
     public function test_all_pages_have_navigation(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -221,7 +244,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_have_theme_toggle(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -233,18 +256,20 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_load_vite_assets(): void
     {
+        // Code editor uses standalone template without Vite
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
             $response->assertStatus(200);
-            // Vite assets are loaded via @vite directive
-            $response->assertSee('build/assets/app', false);
+            // Vite assets are loaded via @vite directive (with hash in filename)
+            $response->assertSee('assets/app-', false);
         }
     }
 
     public function test_all_tool_pages_have_back_link(): void
     {
+        // Code editor uses standalone template with home link instead of back
         $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
 
         foreach ($toolPages as $page) {
@@ -298,7 +323,7 @@ class WebRoutesTest extends TestCase
 
     public function test_pages_have_csrf_token(): void
     {
-        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);

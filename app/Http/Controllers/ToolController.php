@@ -63,6 +63,12 @@ class ToolController extends Controller
                 'route' => 'tools.url',
                 'icon' => 'link',
             ],
+            [
+                'name' => 'Code Editor',
+                'description' => 'Write HTML, CSS, JS with live preview',
+                'route' => 'tools.code-editor',
+                'icon' => 'editor',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -111,5 +117,10 @@ class ToolController extends Controller
     public function url(): View
     {
         return view('tools.url');
+    }
+
+    public function codeEditor(): View
+    {
+        return view('tools.code-editor');
     }
 }
