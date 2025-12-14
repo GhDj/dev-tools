@@ -104,6 +104,10 @@ class ToolController extends Controller
                 'description' => 'Encode/decode HTML entities and special characters',
                 'route' => 'tools.html-entity',
                 'icon' => 'html-entity',
+                'name' => 'Text Case Converter',
+                'description' => 'Convert text to camelCase, snake_case, and more',
+                'route' => 'tools.text-case',
+                'icon' => 'text-case',
             ],
         ];
 
@@ -188,5 +192,8 @@ class ToolController extends Controller
     public function htmlEntity(): View
     {
         return view('tools.html-entity');
+    public function textCase(): View
+    {
+        return view('tools.text-case');
     }
 }
