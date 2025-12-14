@@ -28,6 +28,7 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/text-case', [ToolController::class, 'textCase'])->name('text-case');
     Route::get('/password', [ToolController::class, 'password'])->name('password');
     Route::get('/lorem', [ToolController::class, 'lorem'])->name('lorem');
+    Route::get('/cron', [ToolController::class, 'cron'])->name('cron');
 });
 
 // Static Pages
@@ -60,6 +61,7 @@ Route::get('/sitemap.xml', function () {
         ['loc' => route('tools.text-case'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.password'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.lorem'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => route('tools.cron'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('about'), 'priority' => '0.5', 'changefreq' => 'monthly'],
         ['loc' => route('privacy'), 'priority' => '0.3', 'changefreq' => 'yearly'],
     ];

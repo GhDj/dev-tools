@@ -116,6 +116,10 @@ class ToolController extends Controller
                 'description' => 'Generate placeholder text for designs',
                 'route' => 'tools.lorem',
                 'icon' => 'text',
+                'name' => 'Cron Parser',
+                'description' => 'Parse and explain cron expressions',
+                'route' => 'tools.cron',
+                'icon' => 'clock',
             ],
         ];
 
@@ -209,5 +213,8 @@ class ToolController extends Controller
     public function lorem(): View
     {
         return view('tools.lorem-ipsum');
+    public function cron(): View
+    {
+        return view('tools.cron-parser');
     }
 }
