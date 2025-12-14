@@ -37,6 +37,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('QR Code Generator');
 
         $response->assertSee('HTML Entity Encoder');
+        $response->assertSee('Text Case Converter');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -62,6 +63,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.qr-code') . '"', false);
 
         $response->assertSee('href="' . route('tools.html-entity') . '"', false);
+        $response->assertSee('href="' . route('tools.text-case') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -366,11 +368,30 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Decode');
         $response->assertSee('Common HTML Entities');
         $response->assertSee('Entity Reference');
+    public function test_text_case_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/text-case');
+
+        $response->assertStatus(200);
+        $response->assertSee('Text Case Converter');
+        $response->assertSee('Convert text between different case formats');
+    }
+
+    public function test_text_case_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/text-case');
+
+        $response->assertStatus(200);
+        $response->assertSee('Input Text');
+        $response->assertSee('Convert To');
+        $response->assertSee('camelCase');
+        $response->assertSee('snake_case');
     }
 
     public function test_all_pages_have_navigation(): void
     {
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/text-case'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -383,6 +404,7 @@ class WebRoutesTest extends TestCase
     public function test_all_pages_have_theme_toggle(): void
     {
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/text-case'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -396,6 +418,7 @@ class WebRoutesTest extends TestCase
     {
         // Code editor uses standalone template without Vite
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/text-case'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -409,6 +432,7 @@ class WebRoutesTest extends TestCase
     {
         // Code editor uses standalone template with home link instead of back
         $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/text-case'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
@@ -462,6 +486,7 @@ class WebRoutesTest extends TestCase
     public function test_pages_have_csrf_token(): void
     {
         $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/text-case'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
