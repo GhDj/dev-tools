@@ -87,6 +87,12 @@ class ToolController extends Controller
                 'route' => 'tools.slug-generator',
                 'icon' => 'slug',
             ],
+            [
+                'name' => 'Color Picker',
+                'description' => 'Pick colors and convert between HEX, RGB, HSL, CMYK',
+                'route' => 'tools.color-picker',
+                'icon' => 'color',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -155,5 +161,10 @@ class ToolController extends Controller
     public function slugGenerator(): View
     {
         return view('tools.slug-generator');
+    }
+
+    public function colorPicker(): View
+    {
+        return view('tools.color-picker');
     }
 }
