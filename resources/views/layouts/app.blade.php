@@ -67,17 +67,44 @@
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <!-- Day/Night Toggle -->
                     <button
                         @click="darkMode = !darkMode"
-                        class="p-2 rounded-lg bg-gray-100 dark:bg-dark-border hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                        class="theme-toggle group relative w-16 h-8 rounded-full transition-all duration-500 overflow-hidden"
+                        :class="darkMode ? 'bg-indigo-950' : 'bg-sky-400'"
                         :title="darkMode ? 'Switch to light mode' : 'Switch to dark mode'"
                     >
-                        <svg x-show="!darkMode" class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                        </svg>
-                        <svg x-show="darkMode" x-cloak class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                        </svg>
+                        <!-- Stars (visible in dark mode) -->
+                        <div class="absolute inset-0 transition-opacity duration-500" :class="darkMode ? 'opacity-100' : 'opacity-0'">
+                            <span class="absolute w-1 h-1 bg-white rounded-full top-2 left-3 animate-pulse"></span>
+                            <span class="absolute w-0.5 h-0.5 bg-white rounded-full top-4 left-6 animate-pulse delay-100"></span>
+                            <span class="absolute w-1 h-1 bg-white rounded-full top-1.5 left-9 animate-pulse delay-200"></span>
+                            <span class="absolute w-0.5 h-0.5 bg-white rounded-full top-5 left-4 animate-pulse delay-300"></span>
+                        </div>
+                        <!-- Clouds (visible in light mode) -->
+                        <div class="absolute inset-0 transition-opacity duration-500" :class="darkMode ? 'opacity-0' : 'opacity-100'">
+                            <span class="absolute w-4 h-2 bg-white/60 rounded-full top-1 left-7 blur-[1px]"></span>
+                            <span class="absolute w-3 h-1.5 bg-white/40 rounded-full top-5 left-2 blur-[1px]"></span>
+                        </div>
+                        <!-- Sun/Moon Orb -->
+                        <div
+                            class="absolute top-1 w-6 h-6 rounded-full shadow-lg transition-all duration-500 flex items-center justify-center"
+                            :class="darkMode
+                                ? 'left-9 bg-gray-200 shadow-gray-400/30'
+                                : 'left-1 bg-yellow-300 shadow-yellow-500/50'"
+                        >
+                            <!-- Sun rays (light mode) -->
+                            <div class="absolute inset-0 transition-opacity duration-300" :class="darkMode ? 'opacity-0' : 'opacity-100'">
+                                <span class="absolute w-full h-0.5 bg-yellow-400/60 top-1/2 -translate-y-1/2 -left-1 scale-x-125"></span>
+                                <span class="absolute h-full w-0.5 bg-yellow-400/60 left-1/2 -translate-x-1/2 -top-1 scale-y-125"></span>
+                            </div>
+                            <!-- Moon craters (dark mode) -->
+                            <div class="absolute inset-0 transition-opacity duration-300" :class="darkMode ? 'opacity-100' : 'opacity-0'">
+                                <span class="absolute w-1.5 h-1.5 bg-gray-300 rounded-full top-1 left-1"></span>
+                                <span class="absolute w-1 h-1 bg-gray-300 rounded-full bottom-1.5 right-1.5"></span>
+                                <span class="absolute w-0.5 h-0.5 bg-gray-300 rounded-full top-3 right-2"></span>
+                            </div>
+                        </div>
                     </button>
                 </div>
             </div>
