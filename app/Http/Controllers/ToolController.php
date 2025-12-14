@@ -75,6 +75,12 @@ class ToolController extends Controller
                 'route' => 'tools.regex',
                 'icon' => 'regex',
             ],
+            [
+                'name' => 'Color Picker',
+                'description' => 'Pick colors and convert between HEX, RGB, HSL, CMYK',
+                'route' => 'tools.color-picker',
+                'icon' => 'color',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -133,5 +139,10 @@ class ToolController extends Controller
     public function regex(): View
     {
         return view('tools.regex');
+    }
+
+    public function colorPicker(): View
+    {
+        return view('tools.color-picker');
     }
 }
