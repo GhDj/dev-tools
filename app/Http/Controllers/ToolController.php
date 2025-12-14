@@ -69,6 +69,12 @@ class ToolController extends Controller
                 'route' => 'tools.code-editor',
                 'icon' => 'editor',
             ],
+            [
+                'name' => 'Diff Checker',
+                'description' => 'Compare two texts and highlight differences',
+                'route' => 'tools.diff',
+                'icon' => 'diff',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -122,5 +128,10 @@ class ToolController extends Controller
     public function codeEditor(): View
     {
         return view('tools.code-editor');
+    }
+
+    public function diff(): View
+    {
+        return view('tools.diff');
     }
 }

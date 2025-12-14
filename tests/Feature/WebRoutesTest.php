@@ -28,6 +28,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Hash Generator');
         $response->assertSee('URL Encoder');
         $response->assertSee('Code Editor');
+        $response->assertSee('Diff Checker');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -44,6 +45,7 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.hash') . '"', false);
         $response->assertSee('href="' . route('tools.url') . '"', false);
         $response->assertSee('href="' . route('tools.code-editor') . '"', false);
+        $response->assertSee('href="' . route('tools.diff') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -230,9 +232,28 @@ class WebRoutesTest extends TestCase
         $response->assertSee('monaco-container');
     }
 
+    public function test_diff_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/diff');
+
+        $response->assertStatus(200);
+        $response->assertSee('Diff Checker');
+        $response->assertSee('Compare two texts');
+    }
+
+    public function test_diff_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/diff');
+
+        $response->assertStatus(200);
+        $response->assertSee('Original Text');
+        $response->assertSee('Modified Text');
+        $response->assertSee('Compare');
+    }
+
     public function test_all_pages_have_navigation(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/diff'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -244,7 +265,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_have_theme_toggle(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/diff'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -257,7 +278,7 @@ class WebRoutesTest extends TestCase
     public function test_all_pages_load_vite_assets(): void
     {
         // Code editor uses standalone template without Vite
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/diff'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -270,7 +291,7 @@ class WebRoutesTest extends TestCase
     public function test_all_tool_pages_have_back_link(): void
     {
         // Code editor uses standalone template with home link instead of back
-        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/diff'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
