@@ -69,6 +69,12 @@ class ToolController extends Controller
                 'route' => 'tools.code-editor',
                 'icon' => 'editor',
             ],
+            [
+                'name' => 'Timestamp Converter',
+                'description' => 'Convert Unix timestamps to dates and vice versa',
+                'route' => 'tools.timestamp',
+                'icon' => 'clock',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -122,5 +128,10 @@ class ToolController extends Controller
     public function codeEditor(): View
     {
         return view('tools.code-editor');
+    }
+
+    public function timestamp(): View
+    {
+        return view('tools.timestamp');
     }
 }
