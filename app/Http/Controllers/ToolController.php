@@ -75,6 +75,12 @@ class ToolController extends Controller
                 'route' => 'tools.regex',
                 'icon' => 'regex',
             ],
+            [
+                'name' => 'Text Case Converter',
+                'description' => 'Convert text to camelCase, snake_case, and more',
+                'route' => 'tools.text-case',
+                'icon' => 'text-case',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -133,5 +139,10 @@ class ToolController extends Controller
     public function regex(): View
     {
         return view('tools.regex');
+    }
+
+    public function textCase(): View
+    {
+        return view('tools.text-case');
     }
 }
