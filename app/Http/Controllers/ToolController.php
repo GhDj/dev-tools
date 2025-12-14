@@ -135,6 +135,12 @@ class ToolController extends Controller
                 'route' => 'tools.jwt',
                 'icon' => 'jwt',
             ],
+            [
+                'name' => 'Timestamp Converter',
+                'description' => 'Convert Unix timestamps to dates and vice versa',
+                'route' => 'tools.timestamp',
+                'icon' => 'timestamp',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -243,5 +249,10 @@ class ToolController extends Controller
     public function jwt(): View
     {
         return view('tools.jwt');
+    }
+
+    public function timestamp(): View
+    {
+        return view('tools.timestamp');
     }
 }

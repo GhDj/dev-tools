@@ -27,6 +27,7 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/lorem', [ToolController::class, 'lorem'])->name('lorem');
     Route::get('/cron', [ToolController::class, 'cron'])->name('cron');
     Route::get('/jwt', [ToolController::class, 'jwt'])->name('jwt');
+    Route::get('/timestamp', [ToolController::class, 'timestamp'])->name('timestamp');
 });
 
 // Static Pages
@@ -58,6 +59,7 @@ Route::get('/sitemap.xml', function () {
         ['loc' => route('tools.lorem'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.cron'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.jwt'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => route('tools.timestamp'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('about'), 'priority' => '0.5', 'changefreq' => 'monthly'],
         ['loc' => route('privacy'), 'priority' => '0.3', 'changefreq' => 'yearly'],
     ];
