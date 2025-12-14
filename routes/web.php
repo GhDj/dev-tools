@@ -18,6 +18,7 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/code-editor', [ToolController::class, 'codeEditor'])->name('code-editor');
     Route::get('/regex', [ToolController::class, 'regex'])->name('regex');
     Route::get('/base-converter', [ToolController::class, 'baseConverter'])->name('base-converter');
+    Route::get('/slug-generator', [ToolController::class, 'slugGenerator'])->name('slug-generator');
 });
 
 // Static Pages
@@ -40,6 +41,7 @@ Route::get('/sitemap.xml', function () {
         ['loc' => route('tools.code-editor'), 'priority' => '0.9', 'changefreq' => 'monthly'],
         ['loc' => route('tools.regex'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.base-converter'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => route('tools.slug-generator'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('about'), 'priority' => '0.5', 'changefreq' => 'monthly'],
         ['loc' => route('privacy'), 'priority' => '0.3', 'changefreq' => 'yearly'],
     ];
