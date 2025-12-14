@@ -108,6 +108,10 @@ class ToolController extends Controller
                 'description' => 'Convert text to camelCase, snake_case, and more',
                 'route' => 'tools.text-case',
                 'icon' => 'text-case',
+                'name' => 'Password Generator',
+                'description' => 'Generate secure random passwords',
+                'route' => 'tools.password',
+                'icon' => 'key',
             ],
         ];
 
@@ -195,5 +199,8 @@ class ToolController extends Controller
     public function textCase(): View
     {
         return view('tools.text-case');
+    public function password(): View
+    {
+        return view('tools.password-generator');
     }
 }
