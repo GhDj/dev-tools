@@ -75,6 +75,12 @@ class ToolController extends Controller
                 'route' => 'tools.regex',
                 'icon' => 'regex',
             ],
+            [
+                'name' => 'Password Generator',
+                'description' => 'Generate secure random passwords',
+                'route' => 'tools.password',
+                'icon' => 'key',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -133,5 +139,10 @@ class ToolController extends Controller
     public function regex(): View
     {
         return view('tools.regex');
+    }
+
+    public function password(): View
+    {
+        return view('tools.password-generator');
     }
 }
