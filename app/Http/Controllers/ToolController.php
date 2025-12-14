@@ -93,6 +93,12 @@ class ToolController extends Controller
                 'route' => 'tools.color-picker',
                 'icon' => 'color',
             ],
+            [
+                'name' => 'QR Code Generator',
+                'description' => 'Generate QR codes for URLs, text, and more',
+                'route' => 'tools.qr-code',
+                'icon' => 'qrcode',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -166,5 +172,10 @@ class ToolController extends Controller
     public function colorPicker(): View
     {
         return view('tools.color-picker');
+    }
+
+    public function qrCode(): View
+    {
+        return view('tools.qr-code');
     }
 }
