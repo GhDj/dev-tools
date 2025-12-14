@@ -99,6 +99,12 @@ class ToolController extends Controller
                 'route' => 'tools.qr-code',
                 'icon' => 'qrcode',
             ],
+            [
+                'name' => 'HTML Entity Encoder',
+                'description' => 'Encode/decode HTML entities and special characters',
+                'route' => 'tools.html-entity',
+                'icon' => 'html-entity',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -177,5 +183,10 @@ class ToolController extends Controller
     public function qrCode(): View
     {
         return view('tools.qr-code');
+    }
+
+    public function htmlEntity(): View
+    {
+        return view('tools.html-entity');
     }
 }
