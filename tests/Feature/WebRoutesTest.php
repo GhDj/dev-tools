@@ -38,6 +38,7 @@ class WebRoutesTest extends TestCase
 
         $response->assertSee('HTML Entity Encoder');
         $response->assertSee('Text Case Converter');
+        $response->assertSee('Password Generator');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -64,6 +65,7 @@ class WebRoutesTest extends TestCase
 
         $response->assertSee('href="' . route('tools.html-entity') . '"', false);
         $response->assertSee('href="' . route('tools.text-case') . '"', false);
+        $response->assertSee('href="' . route('tools.password') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -386,12 +388,31 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Convert To');
         $response->assertSee('camelCase');
         $response->assertSee('snake_case');
+    public function test_password_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/password');
+
+        $response->assertStatus(200);
+        $response->assertSee('Password Generator');
+        $response->assertSee('Generate secure random passwords');
+    }
+
+    public function test_password_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/password');
+
+        $response->assertStatus(200);
+        $response->assertSee('Generated Password');
+        $response->assertSee('Strength');
+        $response->assertSee('Options');
+        $response->assertSee('Quick Presets');
     }
 
     public function test_all_pages_have_navigation(): void
     {
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/text-case'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/password'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -405,6 +426,7 @@ class WebRoutesTest extends TestCase
     {
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/text-case'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/password'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -419,6 +441,7 @@ class WebRoutesTest extends TestCase
         // Code editor uses standalone template without Vite
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/text-case'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/password'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -433,6 +456,7 @@ class WebRoutesTest extends TestCase
         // Code editor uses standalone template with home link instead of back
         $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/text-case'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/password'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
@@ -487,6 +511,7 @@ class WebRoutesTest extends TestCase
     {
         $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity'];
         $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/text-case'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/password'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
