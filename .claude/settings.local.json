@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php artisan test:*)",
+      "Bash(php artisan:*)",
+      "Bash(./vendor/bin/phpunit:*)",
+      "Bash(cat:*)",
+      "Bash(npm run build:*)",
+      "WebFetch(domain:dev-tools.online)",
+      "WebSearch",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git cherry-pick:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
