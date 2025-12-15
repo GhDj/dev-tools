@@ -126,7 +126,7 @@
                     <a href="{{ route('about') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">About</a>
                     <a href="{{ route('privacy') }}" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Privacy</a>
                     <a href="https://github.com/GhDj/dev-tools" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">GitHub</a>
-                    <span class="text-gray-500 dark:text-gray-500">v1.1.0</span>
+                    <span class="text-gray-500 dark:text-gray-500">v1.2.0</span>
                 </div>
             </div>
         </div>
