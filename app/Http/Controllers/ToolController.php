@@ -147,12 +147,6 @@ class ToolController extends Controller
                 'route' => 'tools.diff',
                 'icon' => 'diff',
             ],
-            [
-                'name' => 'Sort Lines',
-                'description' => 'Sort, deduplicate, reverse, and shuffle lines',
-                'route' => 'tools.sort-lines',
-                'icon' => 'sort',
-            ],
         ];
 
         return view('home', compact('tools'));
@@ -271,10 +265,5 @@ class ToolController extends Controller
     public function diff(): View
     {
         return view('tools.diff');
-    }
-
-    public function sortLines(): View
-    {
-        return view('tools.sort-lines');
     }
 }

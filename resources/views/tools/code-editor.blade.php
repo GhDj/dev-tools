@@ -575,7 +575,7 @@ console.log("Hello from the code editor!");`
             case 'css': return '/* Styles */\n';
             case 'javascript': return '// JavaScript\n';
             case 'json': return '{\n    \n}';
-            case 'php': return '<' + '?php\n\n';
+            case 'php': return '<?php\n\n';
             case 'sql': return '-- SQL Query\n';
             default: return '';
         }
