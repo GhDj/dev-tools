@@ -75,6 +75,60 @@ class ToolController extends Controller
                 'route' => 'tools.regex',
                 'icon' => 'regex',
             ],
+            [
+                'name' => 'Base Converter',
+                'description' => 'Convert between binary, octal, decimal, and hex',
+                'route' => 'tools.base-converter',
+                'icon' => 'calculator',
+            ],
+            [
+                'name' => 'Slug Generator',
+                'description' => 'Convert text to URL-friendly slugs',
+                'route' => 'tools.slug-generator',
+                'icon' => 'slug',
+            ],
+            [
+                'name' => 'Color Picker',
+                'description' => 'Pick colors and convert between HEX, RGB, HSL, CMYK',
+                'route' => 'tools.color-picker',
+                'icon' => 'color',
+            ],
+            [
+                'name' => 'QR Code Generator',
+                'description' => 'Generate QR codes for URLs, text, and more',
+                'route' => 'tools.qr-code',
+                'icon' => 'qrcode',
+            ],
+            [
+                'name' => 'HTML Entity Encoder',
+                'description' => 'Encode/decode HTML entities and special characters',
+                'route' => 'tools.html-entity',
+                'icon' => 'html-entity',
+            ],
+            [
+                'name' => 'Text Case Converter',
+                'description' => 'Convert text to camelCase, snake_case, and more',
+                'route' => 'tools.text-case',
+                'icon' => 'text-case',
+            ],
+            [
+                'name' => 'Password Generator',
+                'description' => 'Generate secure random passwords',
+                'route' => 'tools.password',
+                'icon' => 'key',
+            ],
+            [
+                'name' => 'Lorem Ipsum Generator',
+                'description' => 'Generate placeholder text for designs',
+                'route' => 'tools.lorem',
+                'icon' => 'text',
+            ],
+            [
+                'name' => 'Cron Parser',
+                'description' => 'Parse and explain cron expressions',
+                'route' => 'tools.cron',
+                'icon' => 'clock',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -133,5 +187,50 @@ class ToolController extends Controller
     public function regex(): View
     {
         return view('tools.regex');
+    }
+
+    public function baseConverter(): View
+    {
+        return view('tools.base-converter');
+    }
+
+    public function slugGenerator(): View
+    {
+        return view('tools.slug-generator');
+    }
+
+    public function colorPicker(): View
+    {
+        return view('tools.color-picker');
+    }
+
+    public function qrCode(): View
+    {
+        return view('tools.qr-code');
+    }
+
+    public function htmlEntity(): View
+    {
+        return view('tools.html-entity');
+    }
+
+    public function textCase(): View
+    {
+        return view('tools.text-case');
+    }
+
+    public function password(): View
+    {
+        return view('tools.password-generator');
+    }
+
+    public function lorem(): View
+    {
+        return view('tools.lorem-ipsum');
+    }
+
+    public function cron(): View
+    {
+        return view('tools.cron-parser');
     }
 }

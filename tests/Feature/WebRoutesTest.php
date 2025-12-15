@@ -29,6 +29,18 @@ class WebRoutesTest extends TestCase
         $response->assertSee('URL Encoder');
         $response->assertSee('Code Editor');
         $response->assertSee('Regex Tester');
+
+        $response->assertSee('Base Converter');
+        $response->assertSee('Slug Generator');
+        $response->assertSee('Color Picker');
+
+        $response->assertSee('QR Code Generator');
+
+        $response->assertSee('HTML Entity Encoder');
+        $response->assertSee('Text Case Converter');
+        $response->assertSee('Password Generator');
+        $response->assertSee('Lorem Ipsum Generator');
+        $response->assertSee('Cron Parser');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -46,6 +58,18 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.url') . '"', false);
         $response->assertSee('href="' . route('tools.code-editor') . '"', false);
         $response->assertSee('href="' . route('tools.regex') . '"', false);
+
+        $response->assertSee('href="' . route('tools.base-converter') . '"', false);
+        $response->assertSee('href="' . route('tools.slug-generator') . '"', false);
+        $response->assertSee('href="' . route('tools.color-picker') . '"', false);
+
+        $response->assertSee('href="' . route('tools.qr-code') . '"', false);
+
+        $response->assertSee('href="' . route('tools.html-entity') . '"', false);
+        $response->assertSee('href="' . route('tools.text-case') . '"', false);
+        $response->assertSee('href="' . route('tools.password') . '"', false);
+        $response->assertSee('href="' . route('tools.lorem') . '"', false);
+        $response->assertSee('href="' . route('tools.cron') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -252,9 +276,191 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Match Details');
     }
 
+
+    public function test_base_converter_page_loads(): void
+    {
+        $response = $this->get('/tools/base-converter');
+
+        $response->assertStatus(200);
+        $response->assertSee('Base Converter');
+        $response->assertSee('Convert between binary, octal, decimal, and hexadecimal');
+    }
+
+    public function test_base_converter_has_required_elements(): void
+    {
+        $response = $this->get('/tools/base-converter');
+
+        $response->assertStatus(200);
+        $response->assertSee('Binary');
+        $response->assertSee('Octal');
+        $response->assertSee('Decimal');
+        $response->assertSee('Hexadecimal');
+    }
+
+    public function test_slug_generator_page_loads(): void
+    {
+        $response = $this->get('/tools/slug-generator');
+
+        $response->assertStatus(200);
+        $response->assertSee('Slug Generator');
+        $response->assertSee('Convert text to URL-friendly slugs');
+    }
+
+    public function test_slug_generator_has_required_elements(): void
+    {
+        $response = $this->get('/tools/slug-generator');
+
+        $response->assertStatus(200);
+        $response->assertSee('Input Text');
+        $response->assertSee('Generated Slug');
+        $response->assertSee('Separator');
+        $response->assertSee('Hyphen');
+    }
+
+    public function test_color_picker_page_loads(): void
+    {
+        $response = $this->get('/tools/color-picker');
+
+        $response->assertStatus(200);
+        $response->assertSee('Color Picker');
+        $response->assertSee('Convert between HEX, RGB, HSL, and CMYK');
+    }
+
+    public function test_color_picker_has_required_elements(): void
+    {
+        $response = $this->get('/tools/color-picker');
+
+        $response->assertStatus(200);
+        $response->assertSee('HEX');
+        $response->assertSee('RGB');
+        $response->assertSee('HSL');
+        $response->assertSee('CMYK');
+        $response->assertSee('Color Harmony');
+    }
+
+    public function test_qr_code_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/qr-code');
+
+        $response->assertStatus(200);
+        $response->assertSee('QR Code Generator');
+        $response->assertSee('Generate QR codes for URLs, text, and more');
+    }
+
+    public function test_qr_code_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/qr-code');
+
+        $response->assertStatus(200);
+        $response->assertSee('Content');
+        $response->assertSee('Quick Templates');
+        $response->assertSee('Download PNG');
+        $response->assertSee('Error Correction');
+    }
+
+    public function test_html_entity_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/html-entity');
+
+        $response->assertStatus(200);
+        $response->assertSee('HTML Entity Encoder/Decoder');
+        $response->assertSee('Encode special characters to HTML entities or decode them back to text');
+    }
+
+    public function test_html_entity_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/html-entity');
+
+        $response->assertStatus(200);
+        $response->assertSee('Encode');
+        $response->assertSee('Decode');
+        $response->assertSee('Common HTML Entities');
+        $response->assertSee('Entity Reference');
+    }
+
+    public function test_text_case_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/text-case');
+
+        $response->assertStatus(200);
+        $response->assertSee('Text Case Converter');
+        $response->assertSee('Convert text between different case formats');
+    }
+
+    public function test_text_case_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/text-case');
+
+        $response->assertStatus(200);
+        $response->assertSee('Input Text');
+        $response->assertSee('Convert To');
+        $response->assertSee('camelCase');
+        $response->assertSee('snake_case');
+    }
+
+    public function test_password_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/password');
+
+        $response->assertStatus(200);
+        $response->assertSee('Password Generator');
+        $response->assertSee('Generate secure random passwords');
+    }
+
+    public function test_password_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/password');
+
+        $response->assertStatus(200);
+        $response->assertSee('Generated Password');
+        $response->assertSee('Strength');
+        $response->assertSee('Options');
+        $response->assertSee('Quick Presets');
+    }
+
+    public function test_lorem_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/lorem');
+
+        $response->assertStatus(200);
+        $response->assertSee('Lorem Ipsum Generator');
+        $response->assertSee('Generate placeholder text');
+    }
+
+    public function test_lorem_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/lorem');
+
+        $response->assertStatus(200);
+        $response->assertSee('Paragraphs');
+        $response->assertSee('Sentences');
+        $response->assertSee('Words');
+        $response->assertSee('Generate');
+    }
+
+    public function test_cron_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/cron');
+
+        $response->assertStatus(200);
+        $response->assertSee('Cron Expression Parser');
+        $response->assertSee('Parse and explain cron expressions');
+    }
+
+    public function test_cron_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/cron');
+
+        $response->assertStatus(200);
+        $response->assertSee('Cron Expression');
+        $response->assertSee('Common Patterns');
+        $response->assertSee('Syntax Reference');
+        $response->assertSee('Next Run Times');
+    }
+
     public function test_all_pages_have_navigation(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -266,7 +472,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_have_theme_toggle(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -279,7 +485,7 @@ class WebRoutesTest extends TestCase
     public function test_all_pages_load_vite_assets(): void
     {
         // Code editor uses standalone template without Vite
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -292,7 +498,7 @@ class WebRoutesTest extends TestCase
     public function test_all_tool_pages_have_back_link(): void
     {
         // Code editor uses standalone template with home link instead of back
-        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
@@ -345,7 +551,7 @@ class WebRoutesTest extends TestCase
 
     public function test_pages_have_csrf_token(): void
     {
-        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
