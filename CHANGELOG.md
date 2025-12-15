@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-12-15
+
+### Added
+
+- **Sort Lines**: New text line manipulation tool
+  - Sort alphabetically (A-Z, Z-A)
+  - Natural sort for alphanumeric strings (file1, file2, file10)
+  - Numeric sort (ascending/descending)
+  - Sort by line length
+  - Reverse line order
+  - Remove duplicates (dedupe)
+  - Shuffle/randomize lines
+  - Options: case sensitive, trim whitespace, remove empty lines
+
+## [1.2.1] - 2025-12-15
+
+### Fixed
+
+- Code Editor: Fix PHP parse error when loading the page (`<?php` string in JavaScript was interpreted as PHP tag)
+
 ## [1.2.0] - 2025-12-15
 
 ### Added
@@ -178,6 +198,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RESTful API endpoints for all tools
 - 146 tests with 386 assertions
 
+[1.3.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.3.0
+[1.2.1]: https://github.com/GhDj/dev-tools/releases/tag/v1.2.1
 [1.2.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.2.0
 [1.1.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.1.0
 [1.0.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.0.0
