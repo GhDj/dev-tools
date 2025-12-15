@@ -129,6 +129,24 @@ class ToolController extends Controller
                 'route' => 'tools.cron',
                 'icon' => 'clock',
             ],
+            [
+                'name' => 'JWT Decoder',
+                'description' => 'Decode and inspect JSON Web Tokens',
+                'route' => 'tools.jwt',
+                'icon' => 'jwt',
+            ],
+            [
+                'name' => 'Timestamp Converter',
+                'description' => 'Convert Unix timestamps to dates and vice versa',
+                'route' => 'tools.timestamp',
+                'icon' => 'timestamp',
+            ],
+            [
+                'name' => 'Diff Checker',
+                'description' => 'Compare two texts and highlight differences',
+                'route' => 'tools.diff',
+                'icon' => 'diff',
+            ],
         ];
 
         return view('home', compact('tools'));
@@ -232,5 +250,20 @@ class ToolController extends Controller
     public function cron(): View
     {
         return view('tools.cron-parser');
+    }
+
+    public function jwt(): View
+    {
+        return view('tools.jwt');
+    }
+
+    public function timestamp(): View
+    {
+        return view('tools.timestamp');
+    }
+
+    public function diff(): View
+    {
+        return view('tools.diff');
     }
 }

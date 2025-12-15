@@ -29,18 +29,18 @@ class WebRoutesTest extends TestCase
         $response->assertSee('URL Encoder');
         $response->assertSee('Code Editor');
         $response->assertSee('Regex Tester');
-
         $response->assertSee('Base Converter');
         $response->assertSee('Slug Generator');
         $response->assertSee('Color Picker');
-
         $response->assertSee('QR Code Generator');
-
         $response->assertSee('HTML Entity Encoder');
         $response->assertSee('Text Case Converter');
         $response->assertSee('Password Generator');
         $response->assertSee('Lorem Ipsum Generator');
         $response->assertSee('Cron Parser');
+        $response->assertSee('JWT Decoder');
+        $response->assertSee('Timestamp Converter');
+        $response->assertSee('Diff Checker');
     }
 
     public function test_home_page_has_tool_links(): void
@@ -58,18 +58,18 @@ class WebRoutesTest extends TestCase
         $response->assertSee('href="' . route('tools.url') . '"', false);
         $response->assertSee('href="' . route('tools.code-editor') . '"', false);
         $response->assertSee('href="' . route('tools.regex') . '"', false);
-
         $response->assertSee('href="' . route('tools.base-converter') . '"', false);
         $response->assertSee('href="' . route('tools.slug-generator') . '"', false);
         $response->assertSee('href="' . route('tools.color-picker') . '"', false);
-
         $response->assertSee('href="' . route('tools.qr-code') . '"', false);
-
         $response->assertSee('href="' . route('tools.html-entity') . '"', false);
         $response->assertSee('href="' . route('tools.text-case') . '"', false);
         $response->assertSee('href="' . route('tools.password') . '"', false);
         $response->assertSee('href="' . route('tools.lorem') . '"', false);
         $response->assertSee('href="' . route('tools.cron') . '"', false);
+        $response->assertSee('href="' . route('tools.jwt') . '"', false);
+        $response->assertSee('href="' . route('tools.timestamp') . '"', false);
+        $response->assertSee('href="' . route('tools.diff') . '"', false);
     }
 
     public function test_csv_tool_page_loads(): void
@@ -458,9 +458,67 @@ class WebRoutesTest extends TestCase
         $response->assertSee('Next Run Times');
     }
 
+    public function test_jwt_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/jwt');
+
+        $response->assertStatus(200);
+        $response->assertSee('JWT Decoder');
+        $response->assertSee('Decode and inspect JSON Web Tokens');
+    }
+
+    public function test_jwt_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/jwt');
+
+        $response->assertStatus(200);
+        $response->assertSee('JWT Token');
+        $response->assertSee('Header');
+        $response->assertSee('Payload');
+        $response->assertSee('Load sample');
+    }
+
+    public function test_timestamp_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/timestamp');
+
+        $response->assertStatus(200);
+        $response->assertSee('Timestamp Converter');
+        $response->assertSee('Convert Unix timestamps to dates');
+    }
+
+    public function test_timestamp_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/timestamp');
+
+        $response->assertStatus(200);
+        $response->assertSee('Timestamp to Date');
+        $response->assertSee('Date to Timestamp');
+        $response->assertSee('Current Unix Timestamp');
+    }
+
+    public function test_diff_tool_page_loads(): void
+    {
+        $response = $this->get('/tools/diff');
+
+        $response->assertStatus(200);
+        $response->assertSee('Diff Checker');
+        $response->assertSee('Compare two texts and highlight differences');
+    }
+
+    public function test_diff_tool_has_required_elements(): void
+    {
+        $response = $this->get('/tools/diff');
+
+        $response->assertStatus(200);
+        $response->assertSee('Original Text');
+        $response->assertSee('Modified Text');
+        $response->assertSee('Compare');
+    }
+
     public function test_all_pages_have_navigation(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron', '/tools/jwt', '/tools/timestamp', '/tools/diff'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -472,7 +530,7 @@ class WebRoutesTest extends TestCase
 
     public function test_all_pages_have_theme_toggle(): void
     {
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron', '/tools/jwt', '/tools/timestamp', '/tools/diff'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -485,7 +543,7 @@ class WebRoutesTest extends TestCase
     public function test_all_pages_load_vite_assets(): void
     {
         // Code editor uses standalone template without Vite
-        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
+        $pages = ['/', '/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron', '/tools/jwt', '/tools/timestamp', '/tools/diff'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
@@ -498,7 +556,7 @@ class WebRoutesTest extends TestCase
     public function test_all_tool_pages_have_back_link(): void
     {
         // Code editor uses standalone template with home link instead of back
-        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
+        $toolPages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron', '/tools/jwt', '/tools/timestamp', '/tools/diff'];
 
         foreach ($toolPages as $page) {
             $response = $this->get($page);
@@ -551,7 +609,7 @@ class WebRoutesTest extends TestCase
 
     public function test_pages_have_csrf_token(): void
     {
-        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron'];
+        $pages = ['/tools/csv', '/tools/yaml', '/tools/markdown', '/tools/sql', '/tools/base64', '/tools/uuid', '/tools/hash', '/tools/url', '/tools/code-editor', '/tools/regex', '/tools/base-converter', '/tools/slug-generator', '/tools/color-picker', '/tools/qr-code', '/tools/html-entity', '/tools/text-case', '/tools/password', '/tools/lorem', '/tools/cron', '/tools/jwt', '/tools/timestamp', '/tools/diff'];
 
         foreach ($pages as $page) {
             $response = $this->get($page);
