@@ -104,18 +104,26 @@ class ToolController extends Controller
                 'description' => 'Encode/decode HTML entities and special characters',
                 'route' => 'tools.html-entity',
                 'icon' => 'html-entity',
+            ],
+            [
                 'name' => 'Text Case Converter',
                 'description' => 'Convert text to camelCase, snake_case, and more',
                 'route' => 'tools.text-case',
                 'icon' => 'text-case',
+            ],
+            [
                 'name' => 'Password Generator',
                 'description' => 'Generate secure random passwords',
                 'route' => 'tools.password',
                 'icon' => 'key',
+            ],
+            [
                 'name' => 'Lorem Ipsum Generator',
                 'description' => 'Generate placeholder text for designs',
                 'route' => 'tools.lorem',
                 'icon' => 'text',
+            ],
+            [
                 'name' => 'Cron Parser',
                 'description' => 'Parse and explain cron expressions',
                 'route' => 'tools.cron',
@@ -204,15 +212,23 @@ class ToolController extends Controller
     public function htmlEntity(): View
     {
         return view('tools.html-entity');
+    }
+
     public function textCase(): View
     {
         return view('tools.text-case');
+    }
+
     public function password(): View
     {
         return view('tools.password-generator');
+    }
+
     public function lorem(): View
     {
         return view('tools.lorem-ipsum');
+    }
+
     public function cron(): View
     {
         return view('tools.cron-parser');
