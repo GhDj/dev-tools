@@ -19,6 +19,9 @@
 /storage/*.key
 /storage/pail
 /vendor
+/bootstrap/cache/*.php
+/database/*.sqlite
+/database/*.sqlite-journal
 Homestead.json
 Homestead.yaml
 Thumbs.db

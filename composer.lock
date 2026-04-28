@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bb720e3c979f64f44a17196c295bcb9",
+    "content-hash": "0a858fe21191d8c1887ca6ad34dbbee9",
     "packages": [
         {
             "name": "brick/math",
@@ -633,6 +633,83 @@
                 }
             ],
             "time": "2023-10-12T05:21:21+00:00"
+        },
+        {
+            "name": "ghdj/laravel-visitor-tracker",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GhDj/laravel-visitor-tracker.git",
+                "reference": "b4b28d3a22d46b39798d53dc47f5a3672633a873"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GhDj/laravel-visitor-tracker/zipball/b4b28d3a22d46b39798d53dc47f5a3672633a873",
+                "reference": "b4b28d3a22d46b39798d53dc47f5a3672633a873",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0|^11.0|^12.0",
+                "illuminate/database": "^10.0|^11.0|^12.0",
+                "illuminate/http": "^10.0|^11.0|^12.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.0",
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^7.0|^8.0",
+                "orchestra/testbench": "^8.0|^9.0|^10.0",
+                "pestphp/pest": "^2.34|^3.0",
+                "pestphp/pest-plugin-laravel": "^2.3|^3.0",
+                "phpstan/phpstan": "^1.10|^2.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "VisitorTracker": "Ghdj\\VisitorTracker\\Facades\\VisitorTracker"
+                    },
+                    "providers": [
+                        "Ghdj\\VisitorTracker\\VisitorTrackerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/Helpers/helpers.php"
+                ],
+                "psr-4": {
+                    "Ghdj\\VisitorTracker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ghdj",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A comprehensive visitor tracking package for Laravel applications with analytics, geolocation, and bot detection - zero external dependencies",
+            "homepage": "https://github.com/ghdj/laravel-visitor-tracker",
+            "keywords": [
+                "analytics",
+                "bot-detection",
+                "geolocation",
+                "laravel",
+                "statistics",
+                "tracking",
+                "visitor",
+                "zero-dependency"
+            ],
+            "support": {
+                "issues": "https://github.com/GhDj/laravel-visitor-tracker/issues",
+                "source": "https://github.com/GhDj/laravel-visitor-tracker/tree/v1.1.0"
+            },
+            "time": "2026-04-28T11:53:44+00:00"
         },
         {
             "name": "graham-campbell/result-type",
