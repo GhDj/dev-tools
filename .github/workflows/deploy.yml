@@ -69,6 +69,15 @@ jobs:
           rm -f .env.example
           rm -f deploy.sh
 
+          # Never ship a local sqlite — would overwrite production data
+          rm -f database/*.sqlite database/*.sqlite-journal
+
+          # Force the server to re-cache config/routes after deploy
+          rm -f bootstrap/cache/config.php
+          rm -f bootstrap/cache/routes-v7.php
+          rm -f bootstrap/cache/services.php
+          rm -f bootstrap/cache/packages.php
+
       - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
