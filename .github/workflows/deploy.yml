@@ -4,35 +4,91 @@ on:
   release:
     types: [published]
   workflow_dispatch:
+    inputs:
+      force_full:
+        description: 'Force full deploy (rebuild and upload vendor + assets)'
+        type: boolean
+        default: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy via SFTP
 
+    env:
+      # Required at build time only: composer install runs package:discover,
+      # which boots the visitor-tracker package and trips its dashboard guard
+      # if no auth method is configured. The runner has no .env, so set this
+      # here to match prod posture (server's .env handles the actual setting).
+      VISITOR_TRACKER_ALLOW_UNPROTECTED: true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Determine what changed since last release
+        id: changes
+        run: |
+          set -euo pipefail
+
+          if [[ "${{ github.event.inputs.force_full }}" == "true" ]]; then
+            echo "Force full deploy requested via workflow_dispatch."
+            echo "composer_changed=true" >> "$GITHUB_OUTPUT"
+            echo "assets_changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Baseline = previous release tag (skip current HEAD if it IS a tag).
+          # Falls back to HEAD^ if there's no prior tag in history.
+          BASE=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || git rev-parse HEAD^)
+          echo "Diff baseline: $BASE"
+
+          CHANGED=$(git diff --name-only "$BASE" HEAD)
+          echo "Changed files since $BASE:"
+          echo "$CHANGED"
+
+          # Vendor needs rebuild + upload only when composer dependencies change.
+          if echo "$CHANGED" | grep -qE '^composer\.(json|lock)$'; then
+            echo "composer_changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "composer_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          # Compiled assets need rebuild + upload when their source or build
+          # config changes. public/build/ filenames are content-hashed by Vite,
+          # so leaving stale ones on the server is harmless.
+          if echo "$CHANGED" | grep -qE '^(package(-lock)?\.json|vite\.config\.js|resources/(css|js)/)'; then
+            echo "assets_changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "assets_changed=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Setup PHP
+        if: steps.changes.outputs.composer_changed == 'true'
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
           extensions: mbstring, xml, ctype, json
 
       - name: Install production dependencies
+        if: steps.changes.outputs.composer_changed == 'true'
         run: composer install --no-dev --optimize-autoloader --no-interaction
 
       - name: Setup Node.js
+        if: steps.changes.outputs.assets_changed == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
       - name: Install npm dependencies
+        if: steps.changes.outputs.assets_changed == 'true'
         run: npm ci
 
       - name: Build assets
+        if: steps.changes.outputs.assets_changed == 'true'
         run: npm run build
 
       - name: Prepare production files
