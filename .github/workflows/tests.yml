@@ -16,6 +16,9 @@ jobs:
 
     name: PHP ${{ matrix.php }}
 
+    env:
+      VISITOR_TRACKER_DASHBOARD_ENABLED: false
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
