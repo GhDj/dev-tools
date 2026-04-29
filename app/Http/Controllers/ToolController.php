@@ -153,12 +153,6 @@ class ToolController extends Controller
                 'route' => 'tools.sort-lines',
                 'icon' => 'sort',
             ],
-            [
-                'name' => 'Visitor Tracker',
-                'description' => 'Server-side visitor analytics for Laravel applications',
-                'route' => 'tools.visitor-tracker',
-                'icon' => 'chart',
-            ],
         ];
 
         return view('home', compact('tools'));
@@ -282,32 +276,5 @@ class ToolController extends Controller
     public function sortLines(): View
     {
         return view('tools.sort-lines');
-    }
-
-    public function visitorTracker(): View
-    {
-        $stats = app(\Ghdj\VisitorTracker\Services\StatisticsService::class);
-        $parser = new \Ghdj\VisitorTracker\Services\UserAgentParser();
-        $botDetector = new \Ghdj\VisitorTracker\Services\BotDetector();
-
-        $userAgent = request()->userAgent();
-        $parsedUA = $parser->parse($userAgent);
-        $isBot = $botDetector->isBot($userAgent);
-        $botName = $isBot ? $botDetector->getBotName($userAgent) : null;
-        $botCategory = $isBot ? $botDetector->getBotCategory($userAgent) : null;
-
-        return view('tools.visitor-tracker', [
-            'summary' => $stats->summary(),
-            'browsers' => $stats->browserStats(5),
-            'platforms' => $stats->platformStats(5),
-            'devices' => $stats->deviceStats(),
-            'topPages' => $stats->mostVisitedPages(5),
-            'userAgent' => $userAgent,
-            'parsedUA' => $parsedUA,
-            'isBot' => $isBot,
-            'botName' => $botName,
-            'botCategory' => $botCategory,
-            'visitorIp' => request()->ip(),
-        ]);
     }
 }
