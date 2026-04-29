@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy via SFTP
 
+    env:
+      # Required at build time only: composer install runs package:discover,
+      # which boots the visitor-tracker package and trips its dashboard guard
+      # if no auth method is configured. The runner has no .env, so set this
+      # here to match prod posture (server's .env handles the actual setting).
+      VISITOR_TRACKER_ALLOW_UNPROTECTED: true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
