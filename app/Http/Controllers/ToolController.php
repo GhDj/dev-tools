@@ -148,6 +148,12 @@ class ToolController extends Controller
                 'icon' => 'diff',
             ],
             [
+                'name' => 'Sort Lines',
+                'description' => 'Sort, deduplicate, reverse, and shuffle text lines',
+                'route' => 'tools.sort-lines',
+                'icon' => 'sort',
+            ],
+            [
                 'name' => 'Visitor Tracker',
                 'description' => 'Server-side visitor analytics for Laravel applications',
                 'route' => 'tools.visitor-tracker',
@@ -271,6 +277,11 @@ class ToolController extends Controller
     public function diff(): View
     {
         return view('tools.diff');
+    }
+
+    public function sortLines(): View
+    {
+        return view('tools.sort-lines');
     }
 
     public function visitorTracker(): View

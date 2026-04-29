@@ -46,14 +46,21 @@ When deploying to a fresh environment, set in the server `.env`:
 
 ### Added
 
-- **Sort Lines**: Sort lines of text alphabetically, numerically, or by
-  length, with options for case sensitivity, reverse order, and removing
-  duplicates.
+- **Sort Lines**: New text line manipulation tool
+  - Sort alphabetically (A-Z, Z-A)
+  - Natural sort for alphanumeric strings (file1, file2, file10)
+  - Numeric sort (ascending/descending)
+  - Sort by line length
+  - Reverse line order
+  - Remove duplicates (dedupe)
+  - Shuffle/randomize lines
+  - Options: case sensitive, trim whitespace, remove empty lines
+
+## [1.2.1] - 2025-12-15
 
 ### Fixed
 
-- Resolved a PHP parse error in the online code editor that prevented
-  some snippets from rendering.
+- Code Editor: Fix PHP parse error when loading the page (`<?php` string in JavaScript was interpreted as PHP tag)
 
 ## [1.2.0] - 2025-12-15
 
@@ -228,6 +235,9 @@ When deploying to a fresh environment, set in the server `.env`:
 - RESTful API endpoints for all tools
 - 146 tests with 386 assertions
 
+[1.4.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.4.0
+[1.3.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.3.0
+[1.2.1]: https://github.com/GhDj/dev-tools/releases/tag/v1.2.1
 [1.2.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.2.0
 [1.1.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.1.0
 [1.0.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.0.0
