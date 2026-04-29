@@ -29,6 +29,7 @@ Route::prefix('tools')->name('tools.')->group(function () {
     Route::get('/jwt', [ToolController::class, 'jwt'])->name('jwt');
     Route::get('/timestamp', [ToolController::class, 'timestamp'])->name('timestamp');
     Route::get('/diff', [ToolController::class, 'diff'])->name('diff');
+    Route::get('/sort-lines', [ToolController::class, 'sortLines'])->name('sort-lines');
     Route::get('/visitor-tracker', [ToolController::class, 'visitorTracker'])->name('visitor-tracker');
 });
 
@@ -63,6 +64,7 @@ Route::get('/sitemap.xml', function () {
         ['loc' => route('tools.jwt'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.timestamp'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.diff'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+        ['loc' => route('tools.sort-lines'), 'priority' => '0.8', 'changefreq' => 'monthly'],
         ['loc' => route('tools.visitor-tracker'), 'priority' => '0.9', 'changefreq' => 'monthly'],
         ['loc' => route('about'), 'priority' => '0.5', 'changefreq' => 'monthly'],
         ['loc' => route('privacy'), 'priority' => '0.3', 'changefreq' => 'yearly'],

@@ -5,6 +5,63 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-04-28
+
+### Added
+
+- **Visitor Tracker**: First-party visitor analytics for dev-tools.online,
+  powered by the `ghdj/laravel-visitor-tracker` package.
+  - New `/tools/visitor-tracker` public-facing tool page (and sitemap entry)
+  - `TrackVisitor` middleware wired into the `web` group so all web requests
+    are recorded
+  - Built-in dashboard at `/admin/visitor-tracker`, with env-driven auth:
+    token-based locally, `allow_unprotected` in production where Cloudflare
+    Access gates `/admin/*` at the edge
+  - Geolocation enabled (ip-api provider) for country breakdowns
+  - Test scaffolding: `phpunit.xml`, `tests/TestCase.php`, and unit/feature
+    tests for the Base64, CSV, Markdown, SQL, and YAML services/APIs
+
+### Operations
+
+- New `cron/migrate.php` entrypoint that bootstraps Laravel and runs
+  `migrate --force`, used by the OVH cron to apply package migrations on
+  shared hosting.
+- Deploy workflow (`deploy.yml`) now strips `database/*.sqlite*` and
+  `bootstrap/cache/*.php` from the build before SFTP, so dev artifacts
+  never reach production and the server re-caches config/routes after
+  deploy.
+- `.gitignore` excludes local SQLite databases and cached bootstrap files.
+- Tests workflow (`tests.yml`) sets `VISITOR_TRACKER_DASHBOARD_ENABLED=false`
+  so the package's boot-time auth guard does not trip during CI.
+
+### Operator notes
+
+When deploying to a fresh environment, set in the server `.env`:
+
+- `VISITOR_TRACKER_ALLOW_UNPROTECTED=true` (or `VISITOR_TRACKER_TOKEN=...`)
+  — required, otherwise the package's service provider throws on boot.
+- `DB_CONNECTION=sqlite` if no DB server is available.
+
+## [1.3.0] - 2025-12-15
+
+### Added
+
+- **Sort Lines**: New text line manipulation tool
+  - Sort alphabetically (A-Z, Z-A)
+  - Natural sort for alphanumeric strings (file1, file2, file10)
+  - Numeric sort (ascending/descending)
+  - Sort by line length
+  - Reverse line order
+  - Remove duplicates (dedupe)
+  - Shuffle/randomize lines
+  - Options: case sensitive, trim whitespace, remove empty lines
+
+## [1.2.1] - 2025-12-15
+
+### Fixed
+
+- Code Editor: Fix PHP parse error when loading the page (`<?php` string in JavaScript was interpreted as PHP tag)
+
 ## [1.2.0] - 2025-12-15
 
 ### Added
@@ -178,6 +235,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - RESTful API endpoints for all tools
 - 146 tests with 386 assertions
 
+[1.4.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.4.0
+[1.3.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.3.0
+[1.2.1]: https://github.com/GhDj/dev-tools/releases/tag/v1.2.1
 [1.2.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.2.0
 [1.1.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.1.0
 [1.0.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.0.0
