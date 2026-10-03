@@ -636,16 +636,16 @@
         },
         {
             "name": "ghdj/laravel-visitor-tracker",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GhDj/laravel-visitor-tracker.git",
-                "reference": "b4b28d3a22d46b39798d53dc47f5a3672633a873"
+                "reference": "df322dc71b6ee33523183e1635fcaec050a8d0ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GhDj/laravel-visitor-tracker/zipball/b4b28d3a22d46b39798d53dc47f5a3672633a873",
-                "reference": "b4b28d3a22d46b39798d53dc47f5a3672633a873",
+                "url": "https://api.github.com/repos/GhDj/laravel-visitor-tracker/zipball/df322dc71b6ee33523183e1635fcaec050a8d0ff",
+                "reference": "df322dc71b6ee33523183e1635fcaec050a8d0ff",
                 "shasum": ""
             },
             "require": {
@@ -707,9 +707,9 @@
             ],
             "support": {
                 "issues": "https://github.com/GhDj/laravel-visitor-tracker/issues",
-                "source": "https://github.com/GhDj/laravel-visitor-tracker/tree/v1.1.0"
+                "source": "https://github.com/GhDj/laravel-visitor-tracker/tree/v1.1.1"
             },
-            "time": "2026-04-28T11:53:44+00:00"
+            "time": "2026-10-03T17:50:16+00:00"
         },
         {
             "name": "graham-campbell/result-type",
