@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2026-11-14
+
+### Fixed
+
+- Remove public-facing visitor-tracker tool page — the package is an internal
+  analytics dependency, not a user-facing tool.
+- Update `ghdj/laravel-visitor-tracker` to v1.2.0: calendar-bounded dashboard
+  periods, bounce-rate accuracy fix, period-scoped caching, and XSS patch on
+  the `?period=` parameter.
+
+### Operations
+
+- Deploy workflow skips `composer install` and `npm run build` when their
+  respective lockfiles haven't changed, cutting deploy time on content-only
+  pushes.
+
 ## [1.4.0] - 2026-04-28
 
 ### Added
@@ -235,6 +251,7 @@ When deploying to a fresh environment, set in the server `.env`:
 - RESTful API endpoints for all tools
 - 146 tests with 386 assertions
 
+[1.4.1]: https://github.com/GhDj/dev-tools/releases/tag/v1.4.1
 [1.4.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.4.0
 [1.3.0]: https://github.com/GhDj/dev-tools/releases/tag/v1.3.0
 [1.2.1]: https://github.com/GhDj/dev-tools/releases/tag/v1.2.1
