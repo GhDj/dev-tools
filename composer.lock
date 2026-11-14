@@ -636,32 +636,32 @@
         },
         {
             "name": "ghdj/laravel-visitor-tracker",
-            "version": "v1.1.1",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GhDj/laravel-visitor-tracker.git",
-                "reference": "df322dc71b6ee33523183e1635fcaec050a8d0ff"
+                "reference": "b36e64ead825c764f32e1540df6d5d2b3e506ec6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GhDj/laravel-visitor-tracker/zipball/df322dc71b6ee33523183e1635fcaec050a8d0ff",
-                "reference": "df322dc71b6ee33523183e1635fcaec050a8d0ff",
+                "url": "https://api.github.com/repos/GhDj/laravel-visitor-tracker/zipball/b36e64ead825c764f32e1540df6d5d2b3e506ec6",
+                "reference": "b36e64ead825c764f32e1540df6d5d2b3e506ec6",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^10.0|^11.0|^12.0",
-                "illuminate/database": "^10.0|^11.0|^12.0",
-                "illuminate/http": "^10.0|^11.0|^12.0",
-                "illuminate/support": "^10.0|^11.0|^12.0",
+                "illuminate/contracts": "^10.0|^11.0|^12.0|^13.0",
+                "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
+                "illuminate/http": "^10.0|^11.0|^12.0|^13.0",
+                "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
                 "php": "^8.1"
             },
             "require-dev": {
                 "guzzlehttp/guzzle": "^7.0",
                 "laravel/pint": "^1.0",
                 "nunomaduro/collision": "^7.0|^8.0",
-                "orchestra/testbench": "^8.0|^9.0|^10.0",
-                "pestphp/pest": "^2.34|^3.0",
-                "pestphp/pest-plugin-laravel": "^2.3|^3.0",
+                "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+                "pestphp/pest": "^2.34|^3.0|^4.0",
+                "pestphp/pest-plugin-laravel": "^2.3|^3.0|^4.0",
                 "phpstan/phpstan": "^1.10|^2.0"
             },
             "type": "library",
@@ -707,9 +707,9 @@
             ],
             "support": {
                 "issues": "https://github.com/GhDj/laravel-visitor-tracker/issues",
-                "source": "https://github.com/GhDj/laravel-visitor-tracker/tree/v1.1.1"
+                "source": "https://github.com/GhDj/laravel-visitor-tracker/tree/v1.2.0"
             },
-            "time": "2026-10-03T17:50:16+00:00"
+            "time": "2026-11-13T11:58:00+00:00"
         },
         {
             "name": "graham-campbell/result-type",
